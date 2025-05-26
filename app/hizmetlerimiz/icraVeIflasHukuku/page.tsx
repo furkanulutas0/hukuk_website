@@ -1,4 +1,4 @@
 export default function Page() {
-    return <h1>Bu sayfa: b</h1>; 
+    return <h1>Bu sayfa: İcra</h1>; 
   }
   

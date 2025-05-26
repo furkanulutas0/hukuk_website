@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+
 // Animation variants for scroll reveal
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
@@ -99,7 +100,7 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-lg md:text-xl font-light mb-6 md:mb-8 text-white max-w-xl"
             >
-              Ulusal ve uluslararası hukuk alanında geniş tecrübe
+              Hukuk alanında geniş tecrübe ve hizmetler 
             </motion.p>
             <motion.button 
               initial={{ opacity: 0, y: 20 }}
@@ -145,16 +146,6 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            {/* Uluslararası Masalar */}
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Uluslararası Masalar</h2>
-              <p className="text-gray-600">
-                Global iş dünyasının ihtiyaçlarına yönelik uluslararası hukuk masalarımız ile hizmet veriyoruz.
-              </p>
-              <Link href="/uluslararasi-masalar" className="text-gray-900 hover:underline inline-block">
-                Masalarımız →
-              </Link>
-            </motion.div>
           </div>
         </div>
       </motion.section>
@@ -212,14 +203,14 @@ export default function Home() {
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
-              "Şirketler Hukuku",
-              "Fikri Mülkiyet Hukuku",
+              "Borçlar Hukuku",
+              "Ceza Hukuku",
+              "İcra ve İflas Hukuku",
+              "İdare ve Vergi Hukuku",
               "İş Hukuku",
-              "Vergi Hukuku",
-              "Gayrimenkul Hukuku",
-              "Enerji Hukuku",
-              "Rekabet Hukuku",
-              "Bankacılık ve Finans Hukuku"
+              "Şirketler Hukuku",
+              "Sözleşmeler Hukuku",
+              "Ticaret Hukuku"
             ].map((area, index) => (
               <motion.div 
                 key={index} 
@@ -233,49 +224,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Global Network Section */}
-      <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="py-12 md:py-16 lg:py-20 bg-gray-50"
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <motion.div variants={fadeInUp} className="space-y-6">
-              <h2 className="text-2xl md:text-3xl font-light text-gray-900">Global Ağımız</h2>
-              <p className="text-gray-600">
-                Dünya çapında güvenilir iş ortaklarımız ve geniş ağımız ile müvekkillerimize uluslararası hukuk alanında kapsamlı hizmetler sunuyoruz.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                {['25+', '100+', '1000+', '50+'].map((number, index) => (
-                  <motion.div 
-                    key={index}
-                    variants={fadeInUp}
-                    className="space-y-2"
-                  >
-                    <span className="text-2xl md:text-3xl font-light text-gray-900">{number}</span>
-                    <p className="text-sm text-gray-600">
-                      {index === 0 ? 'Ülke' : 
-                       index === 1 ? 'İş Ortağı' :
-                       index === 2 ? 'Başarılı Proje' : 'Uzman Avukat'}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div 
-              variants={fadeInUp}
-              className="relative h-[300px] md:h-[400px] bg-gray-200"
-            >
-              <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                Dünya Haritası Görseli
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+     
 
     </div>
   );

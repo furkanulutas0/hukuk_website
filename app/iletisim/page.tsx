@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
-import { useState } from 'react';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
@@ -236,20 +235,7 @@ export default function Contact() {
                       required
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
                     />
-
-            {/* FORM */}
-            <motion.div variants={fadeInUp} className="bg-gray-50 p-6 md:p-8 rounded-lg">
-              <motion.h2 variants={fadeInUp} className="text-xl md:text-2xl font-light text-gray-900 mb-6">Mesaj Gönder</motion.h2>
-              <motion.form variants={staggerContainer} className="space-y-6">
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 mb-1">Ad</label>
-                    <input type="text" id="first-name" name="first-name" className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
-                  </div>
-                  <div>
-                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
-                    <input type="text" id="last-name" name="last-name" className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
-                  </div>
+                </div>
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
@@ -372,7 +358,7 @@ export default function Contact() {
           >
             <span className="text-gray-500">Google Harita Buraya Eklenecek</span>
           </motion.div>
-      </div>
+        </div>
       </motion.section>
     </div>
   );

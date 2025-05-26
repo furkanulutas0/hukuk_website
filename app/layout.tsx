@@ -3,8 +3,9 @@ import { Libre_Baskerville, Source_Sans_3 } from 'next/font/google';
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
-// Font tanımlamaları
+
 const libreBaskerville = Libre_Baskerville({
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -34,7 +35,8 @@ export default function RootLayout({
       <body className="antialiased font-body" suppressHydrationWarning>
         <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}
         {children}
-        <Footer/>
+        <ScrollToTop /> {/* 👈 Bunu ekledik */}
+        <Footer />
       </body>
     </html>
   );

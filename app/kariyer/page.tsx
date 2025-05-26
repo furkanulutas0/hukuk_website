@@ -142,12 +142,7 @@ export default function Kariyer() {
                 
                 <h3 className="text-xl font-medium text-[#9B1B30] mt-8">Sunduğumuz Avantajlar</h3>
                 <ul className="space-y-3 mt-4">
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-[#9B1B30] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Ulusal ve uluslararası alanda geniş deneyim kazanma fırsatı</span>
-                  </li>
+                
                   <li className="flex items-start">
                     <svg className="w-5 h-5 text-[#9B1B30] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
@@ -166,12 +161,7 @@ export default function Kariyer() {
                     </svg>
                     <span>Kariyerinizde ilerleme ve uzmanlaşma fırsatları</span>
                   </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-[#9B1B30] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Rekabetçi ücret ve yan haklar paketi</span>
-                  </li>
+                 
                 </ul>
               </div>
 

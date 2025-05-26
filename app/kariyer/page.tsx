@@ -477,5 +477,5 @@ export default function Kariyer() {
       </section>
     </div>
   );
-}
+  }
   

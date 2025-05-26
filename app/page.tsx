@@ -61,7 +61,7 @@ export default function Home() {
       <section className="relative h-[70vh] md:h-[85vh] lg:h-[85vh] overflow-hidden">
         {/* Arka plan görseli */}
         <div className="absolute inset-0 w-full h-full">
-          <Image 
+        <Image
             src="/images/hukuk1.png"
             alt="Hukuk bürosu arka plan"
             fill
@@ -74,7 +74,7 @@ export default function Home() {
             priority={true}
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88/HjfwAJZAPolF7wHgAAAABJRU5ErkJggg=="
-          />
+        />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
         
@@ -102,14 +102,19 @@ export default function Home() {
             >
               Hukuk alanında geniş tecrübe ve hizmetler 
             </motion.p>
-            <motion.button 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="bg-white text-gray-900 px-6 sm:px-8 py-2 sm:py-3 hover:bg-gray-100 transition-colors"
             >
-              Daha Fazla Bilgi
-            </motion.button>
+              <Link href="/hakkimizda">
+                <motion.button 
+                  className="bg-white text-gray-900 px-6 sm:px-8 py-2 sm:py-3 hover:bg-gray-100 transition-colors"
+                >
+                  Daha Fazla Bilgi
+                </motion.button>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </section>
@@ -216,7 +221,7 @@ export default function Home() {
                 key={index} 
                 variants={fadeInUp}
                 className="border-l-2 border-gray-200 pl-4 py-2 hover:border-gray-900 transition-colors"
-              >
+          >
                 <h3 className="text-base md:text-lg font-light text-gray-900">{area}</h3>
               </motion.div>
             ))}

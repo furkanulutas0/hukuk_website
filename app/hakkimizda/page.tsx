@@ -38,7 +38,7 @@ const fadeIn = {
 export default function About() {
   return (
     <div className="min-h-screen">
-      
+
       {/* Hikayemiz Section */}
       <motion.section 
         initial="hidden"
@@ -133,12 +133,12 @@ export default function About() {
                 className="w-full aspect-square"
               >
                 {/* Klasik bina çizimi */}
-                <div className="p-4 md:p-8">
+                <div className="p-2 md:p-4">
                   <Image 
-                    src="/images/tasarım.png" 
+                    src="/images/tasarım1.png" 
                     alt="tasarım" 
-                    width={300} 
-                    height={400}
+                    width={600} 
+                    height={800}
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -148,7 +148,7 @@ export default function About() {
         </motion.div>
       </motion.section>
 
-      {/* Aksan Ağı Section */}
+      {/* Gedikli Ağı Section */}
       <motion.section 
         initial="hidden"
         whileInView="visible"
@@ -168,7 +168,7 @@ export default function About() {
               variants={fadeInUp}
               className="font-heading text-3xl md:text-4xl lg:text-5xl font-normal mb-8 md:mb-16 text-center tracking-wide"
             >
-              Aksan Ağı
+              Gedikli Ağı
             </motion.h2>
             <motion.div 
               variants={staggerContainer}
@@ -178,7 +178,7 @@ export default function About() {
                 variants={fadeInUp}
                 className="font-body text-base md:text-lg font-light leading-relaxed text-center max-w-4xl mx-auto"
               >
-                Aksan Hukuk Bürosu, güçlü ve çeşitli bir Aksan Ağı oluşturmak için hem değerli çalışma arkadaşlarına hem de değerli müvekkillerine odaklanmaktadır. Aksan Ağı, yurt içinde ve yurtdışındaki ilişkileri ile işbirliği ve güvene dayalı ilişkileri içeren kapsamlı bir yapı oluşturur.
+                Gedikli Hukuk Bürosu, güçlü ve çeşitli bir Gedikli Ağı oluşturmak için hem değerli çalışma arkadaşlarına hem de değerli müvekkillerine odaklanmaktadır. Gedikli Ağı, yurt içinde ve yurtdışındaki ilişkileri ile işbirliği ve güvene dayalı ilişkileri içeren kapsamlı bir yapı oluşturur.
               </motion.p>
               
               <motion.div 
@@ -189,21 +189,21 @@ export default function About() {
                   variants={fadeInUp}
                   className="font-body text-base md:text-lg font-light leading-relaxed"
                 >
-                  Hukukun çeşitli alanlarındaki bilgi ve deneyimleriyle donanmış olan çalışma arkadaşlarımız, müvekkillerimize en kaliteli hizmeti sunmak için bir araya gelirler. Aksan Ağı, çalışma arkadaşlarımız arasındaki işbirliğini teşvik eder ve her biri birbirini tamamlayan yetenekler sunar. Önceden işbirliği yaptığımız çalışma arkadaşlarımız da ağımızda kalmaya devam ederler, böylece uzun vadeli işbirliği ve güvene dayalı ilişkilerimizi sürdürürüz.
+                  Hukukun çeşitli alanlarındaki bilgi ve deneyimleriyle donanmış olan çalışma arkadaşlarımız, müvekkillerimize en kaliteli hizmeti sunmak için bir araya gelirler. Gedikli Ağı, çalışma arkadaşlarımız arasındaki işbirliğini teşvik eder ve her biri birbirini tamamlayan yetenekler sunar. Önceden işbirliği yaptığımız çalışma arkadaşlarımız da ağımızda kalmaya devam ederler, böylece uzun vadeli işbirliği ve güvene dayalı ilişkilerimizi sürdürürüz.
                 </motion.p>
 
                 <motion.p 
                   variants={fadeInUp}
                   className="font-body text-base md:text-lg font-light leading-relaxed"
                 >
-                  Öte yandan Aksan'ın müvekkil ağı, farklı sektörlerden ve bölgelerden de geniş bir yelpazeyi kapsar. Aksan Ağı, müvekkillerimizle kurduğumuz sağlam ilişkileri ve onların ihtiyaçlarını anlama yeteneğimizi yansıtır.
+                  Öte yandan Gedikli'nin müvekkil ağı, farklı sektörlerden ve bölgelerden de geniş bir yelpazeyi kapsar. Gedikli Ağı, müvekkillerimizle kurduğumuz sağlam ilişkileri ve onların ihtiyaçlarını anlama yeteneğimizi yansıtır.
                 </motion.p>
 
                 <motion.p 
                   variants={fadeInUp}
                   className="font-body text-base md:text-lg font-light leading-relaxed"
                 >
-                  Aksan Ağı, hem çalışma arkadaşlarımızın hem de müvekkillerimizin başarılarını desteklemeyi ve güvene dayalı uzun vadeli ilişkiler kurmayı amaçlar. Bu çerçevede, işbirliği ve etkileşim, Aksan'ın hizmet kalitesini sürekli olarak artırmak için temel unsurlardır.
+                  Gedikli Ağı, hem çalışma arkadaşlarımızın hem de müvekkillerimizin başarılarını desteklemeyi ve güvene dayalı uzun vadeli ilişkiler kurmayı amaçlar. Bu çerçevede, işbirliği ve etkileşim, Gedikli'ın hizmet kalitesini sürekli olarak artırmak için temel unsurlardır.
                 </motion.p>
               </motion.div>
             </motion.div>

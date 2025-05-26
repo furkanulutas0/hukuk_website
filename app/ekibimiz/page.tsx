@@ -2,6 +2,7 @@
 import TeamMemberCard from '../components/TeamMemberCard';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
+import { teamMembers } from '../data/team';
 
 // Animation variants
 const fadeInUp = {
@@ -26,54 +27,44 @@ const staggerContainer = {
   }
 };
 
-const team = [
-    {
-        name: "Şura Karaali",
-        title: "Frontend Stajyeri",
-        imageSrc: "/image/law.png",
-        linkedinUrl: "https://linkedin.com/in/surakaraali"
-    },
-    {
-        name: 'Oktay Şener',
-        title: 'Yönetici Ortak',
-        imageSrc: '/team/oktay.jpg',
-        linkedinUrl: 'https://linkedin.com/in/oktaysener'
-    },
-    // Diğer üyeler buraya !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-];
-
 export default function Team() {
     return (
-      <div className="min-h-screen bg-white">
-        {/* Hero Section with Title */}
-        <PageHeaderCard 
-          title="Ekibimiz"
-          description="Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın."
-        />
+        <div className="min-h-screen bg-white">
+            <PageHeaderCard 
+                title="Ekibimiz"
+                description="Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın."
+            />
 
-
-
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="py-20 bg-white"
-        >
-          <motion.div 
-            variants={staggerContainer}
-            className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-          >
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-              >
-                <TeamMemberCard {...member} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.section>
-      </div>
+            <motion.section 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+                className="py-12 md:py-16 lg:py-20"
+            >
+                <div className="container mx-auto px-4 md:px-6">
+                    <motion.div 
+                        variants={staggerContainer}
+                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
+                    >
+                        {teamMembers.map((member, index) => (
+                            <motion.div
+                                key={index}
+                                variants={fadeInUp}
+                            >
+                                <TeamMemberCard
+                                    name={member.name}
+                                    title={member.title}
+                                    imageSrc={member.imageSrc}
+                                    linkedinUrl={member.linkedinUrl}
+                                    email={member.email}
+                                    specialties={member.specialties}
+                                />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
+            </motion.section>
+        </div>
     );
 }

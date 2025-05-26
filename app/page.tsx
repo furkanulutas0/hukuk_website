@@ -151,6 +151,16 @@ export default function Home() {
               </Link>
             </motion.div>
 
+            <motion.div variants={fadeInUp} className="space-y-4">
+              <h2 className="text-xl md:text-2xl font-light text-gray-900">Kariyer</h2>
+              <p className="text-gray-600">
+              Kariyer fırsatlarımızı keşfedin ve bizimle birlikte ulusal ve uluslararası hukuk alanında ilerleyin.
+              </p>
+              <Link href="/kariyer" className="text-gray-900 hover:underline inline-block">
+                Detaylı Bilgi →
+              </Link>
+            </motion.div>
+
           </div>
         </div>
       </motion.section>

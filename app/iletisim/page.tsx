@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
 
@@ -23,6 +22,76 @@ const staggerContainer = {
 
 export default function Contact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
+
+      const response = await fetch('/api/send-contact', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.'
+        });
+        // Form'u temizle
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+
+        // Mesaj Gönder başlığına kaydır
+        const formSection = document.getElementById('contact-form');
+        if (formSection) {
+          formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        throw new Error(data.error || 'Bir hata oluştu');
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Mesajınız gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -112,37 +181,115 @@ export default function Contact() {
             </motion.div>
 
             {/* FORM */}
-            <motion.div variants={fadeInUp} className="bg-gray-50 p-6 md:p-8 rounded-lg">
+            <motion.div variants={fadeInUp} id="contact-form" className="bg-gray-50 p-6 md:p-8 rounded-lg">
               <motion.h2 variants={fadeInUp} className="text-xl md:text-2xl font-light text-gray-900 mb-6">Mesaj Gönder</motion.h2>
-              <motion.form variants={staggerContainer} className="space-y-6">
+
+              {submitStatus && (
+                <div className={`mb-6 p-4 rounded-md ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                  {submitStatus.message}
+                </div>
+              )}
+
+
+
+
+              <motion.form variants={staggerContainer} onSubmit={handleSubmit} className="space-y-6">
                 <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 mb-1">Ad</label>
-                    <input type="text" id="first-name" name="first-name" className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
+                <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">Ad</label>
+                    <input
+                      type="text"
+                      id="firstName" 
+                      name="firstName" 
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
+                    />
                   </div>
                   <div>
-                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
-                    <input type="text" id="last-name" name="last-name" className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
+                    <input 
+                      type="text" 
+                      id="lastName" 
+                      name="lastName" 
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
+                    />
                   </div>
                 </motion.div>
+
+             
 
                 <motion.div variants={fadeInUp}>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
-                  <input type="email" id="email" name="email" className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email" 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
+                  /> 
+                   </motion.div>
+
+                   <motion.div variants={fadeInUp}>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                  <input 
+                    type="phone" 
+                    id="phone" 
+                    name="phone" 
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
+                  />
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-                  <input type="tel" id="phone" name="phone" className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Konu</label>
+                  <select 
+                    id="subject" 
+                    name="subject" 
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
+                  >
+
+                    <option value="">Seçiniz</option>
+                    <option value="genel-bilgi">Genel Bilgi</option>
+                    <option value="sirketler-hukuku">Şirketler Hukuku</option>
+                    <option value="sozlesmeler-hukuku">Sözleşmeler Hukuku</option>
+                    <option value="ticaret-hukuku">Ticaret Hukuku</option>
+                    <option value="ceza-hukuku">Ceza Hukuku</option>
+                    <option value="borclar-hukuku">Borçlar Hukuku</option>
+                    <option value="is-hukuku">İş Hukuku</option>
+                    <option value="idare-hukuku">İdare ve Vergi Hukuku</option>
+                    <option value="icra-hukuku">İcra ve İflas Hukuku</option>
+                    <option value="diger">Diğer</option>
+                  </select>
                 </motion.div>
+
 
                 <motion.div variants={fadeInUp}>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mesajınız</label>
-                  <textarea id="message" name="message" rows={5} className="w-full px-4 py-2 border border-gray-300 rounded-md text-black" />
-                </motion.div>
+                  <textarea
+                    id="message"
+                    name="message" 
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
+                  ></textarea>
+                    </motion.div>
 
                 <motion.div variants={fadeInUp} className="flex items-center">
-                  <input id="privacy-policy" name="privacy-policy" type="checkbox" className="h-4 w-4 text-[#9B1B30] border-gray-300 rounded" />
+                  <input id="privacy-policy" name="privacy-policy" type="checkbox" required className="h-4 w-4 text-[#9B1B30] border-gray-300 rounded focus:ring-[#9B1B30]" />
                   <label htmlFor="privacy-policy" className="ml-2 block text-sm text-gray-700">
                     <span>Kişisel verilerin işlenmesine ilişkin </span>
                     <button
@@ -157,8 +304,14 @@ export default function Contact() {
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                  <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-[#9B1B30] text-white py-3 px-4 rounded-md">
-                    Gönder
+                <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full bg-[#9B1B30] text-white py-3 px-4 rounded-md hover:bg-[#7d1626] transition-colors focus:outline-none focus:ring-2 focus:ring-[#9B1B30] focus:ring-opacity-50 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  >
+                    {isSubmitting ? 'Gönderiliyor...' : 'Gönder'}
                   </motion.button>
                 </motion.div>
               </motion.form>
@@ -167,43 +320,53 @@ export default function Contact() {
         </div>
       </motion.section>
 
-      {/* MODAL */}
+      {/* Google Map */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        className="py-12 md:py-16 lg:py-20 bg-gray-50"
+      >
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.h2
+            variants={fadeInUp}
+            className="text-2xl md:text-3xl font-light text-gray-900 mb-8 text-center"
+          >
+            Lokasyonumuz
+          </motion.h2>
+          <motion.div
+            variants={fadeInUp}
+            className="w-full h-[300px] md:h-[450px] bg-gray-200 rounded-lg overflow-hidden"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.563474225436!2d29.03051527672398!3d40.98797337137357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac96c230b3b85%3A0x75f31b0d8792d09e!2sCenap%20%C5%9Eahabettin%20Sk.%20No%3A124%2C%20Ko%C5%9Fuyolu%2C%20Kad%C4%B1k%C3%B6y%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1716715053046!5m2!1str!2str"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* KVKK Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white max-w-3xl w-full p-6 rounded shadow-lg relative">
             <button onClick={() => setIsModalOpen(false)} className="absolute top-3 right-4 text-gray-600 text-xl">&times;</button>
             <h2 className="text-xl font-semibold mb-4 text-gray-800">Aydınlatma Metni</h2>
             <div className="text-sm text-gray-700 space-y-4 leading-relaxed max-h-[60vh] overflow-y-auto">
-              <p>
-                <strong>1. Veri Sorumlusunun Kimliği:</strong><br />
-                Gedikli Hukuk Bürosu olarak, kişisel verilerinizin korunmasına büyük önem veriyoruz.
-              </p>
-              <p>
-                <strong>2. Kişisel Verilerin İşlenme Amaçları:</strong><br />
-                İletişim formu aracılığıyla toplanan kişisel verileriniz; taleplerinizi değerlendirmek, sizinle iletişime geçmek ve hizmetlerimizi geliştirmek amacıyla işlenmektedir.
-              </p>
-              <p>
-                <strong>3. İşlenen Kişisel Veriler:</strong><br />
-                Ad, soyad, e-posta adresi, telefon numarası ve mesaj içeriğiniz gibi veriler işlenmektedir.
-              </p>
-              <p>
-                <strong>4. Toplanma Yöntemi ve Hukuki Sebep:</strong><br />
-                Verileriniz elektronik ortamda, iletişim formu vasıtasıyla, meşru menfaat hukuki sebebine dayalı olarak toplanmaktadır.
-              </p>
-              <p>
-                <strong>5. Verilerin Aktarımı:</strong><br />
-                Yalnızca hizmet amaçlı ve yasal yükümlülükler gereği sınırlı olarak aktarılabilir.
-              </p>
-              <p>
-                <strong>6. KVKK Kapsamındaki Haklarınız:</strong><br />
-                KVKK 11. madde kapsamında kişisel verilerinize ilişkin her türlü bilgiye ulaşma, düzeltme, silme, işlenmesini engelleme ve itiraz etme hakkına sahipsiniz.
-              </p>
-              <p>
-                <strong>7. İletişim:</strong><br />
-                info@gediklilaw.com adresine başvurarak haklarınızı kullanabilirsiniz.
-              </p>
+              <p><strong>1. Veri Sorumlusunun Kimliği:</strong><br />Gedikli Hukuk Bürosu olarak, kişisel verilerinizin korunmasına büyük önem veriyoruz.</p>
+              <p><strong>2. Kişisel Verilerin İşlenme Amaçları:</strong><br />İletişim formu aracılığıyla toplanan kişisel verileriniz; taleplerinizi değerlendirmek, sizinle iletişime geçmek ve hizmetlerimizi geliştirmek amacıyla işlenmektedir.</p>
+              <p><strong>3. İşlenen Kişisel Veriler:</strong><br />Ad, soyad, e-posta adresi, telefon numarası ve mesaj içeriğiniz gibi veriler işlenmektedir.</p>
+              <p><strong>4. Toplanma Yöntemi ve Hukuki Sebep:</strong><br />Verileriniz elektronik ortamda, iletişim formu vasıtasıyla, meşru menfaat hukuki sebebine dayalı olarak toplanmaktadır.</p>
+              <p><strong>5. Verilerin Aktarımı:</strong><br />Yalnızca hizmet amaçlı ve yasal yükümlülükler gereği sınırlı olarak aktarılabilir.</p>
+              <p><strong>6. KVKK Kapsamındaki Haklarınız:</strong><br />KVKK 11. madde kapsamında kişisel verilerinize ilişkin her türlü bilgiye ulaşma, düzeltme, silme, işlenmesini engelleme ve itiraz etme hakkına sahipsiniz.</p>
+              <p><strong>7. İletişim:</strong><br />info@gediklilaw.com adresine başvurarak haklarınızı kullanabilirsiniz.</p>
             </div>
-
           </div>
         </div>
       )}

@@ -1,0 +1,25 @@
+[
+    {
+      "id": 1,
+      "name": "Şura Karaali",
+      "title": "Frontend Stajyeri",
+      "imageSrc": "/images/team/law.png",
+      "linkedinUrl": "https://linkedin.com/in/surakaraali",
+      "description": "Şirketler hukuku ve birleşme & satın alma işlemleri konusunda 15 yılı aşkın deneyim.",
+      "email": "sura.karaali@gedikli.av.tr",
+      "specialties": ["Web Geliştirme", "UI/UX Tasarım", "Ticaret Hukuku"]
+    },
+    {
+        "id": 2,
+        "name": "Oktay Şener",
+        "title": "Yönetici Ortak",
+        "imageSrc": "/images/team/law.png",
+        "linkedinUrl": "https://linkedin.com/in/oktaysener",
+        "description": "1989 yılında Zonguldak’ta doğan Gedikli, aslen Trabzonludur. Lise eğitimimi TED Zonguldak Koleji’nde tamamlayan Gedikli 2008 yılında Doğuş Üniversitesi Hukuk Fakültesi'nde eğitim görmeye başlamış, 2013 yılında Doğuş Üniversitesi Hukuk Fakültesi’nden mezun olmuş ardından yasal stajını tamamladıktan sonra dil eğitimi için Londra’da bulunmuştur. 2015 yılında Batu Hukuk bünyesine katılan Gedikli, İdare Hukuku, Vergi Hukuku, Ticaret Hukuku, Ceza Hukuku ve İcra İflas Hukuku alanlarında uzmanlaşarak buradaki çalışmasını 2024 yılı Ekim ayına kadar sürdürmüştür. Gedikli 2024 Kasım ayında profesyonel çalışma alanlarını belirleyerek Gedikli Hukuk Bürosunu kurarak avukatlık mesleğini sürdürmektedir.",
+        "email": "oktay.sener@gedikli.av.tr",
+        "specialties": ["Şirketler Hukuku", "Birleşme ve Satın Almalar", "Ticaret Hukuku"]
+    }
+
+      
+  ]
+  

@@ -5,7 +5,16 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
+// ✅ Tek bir metadata objesi olacak!
+export const metadata: Metadata = {
+  title: "Gedikli Hukuk Bürosu",
+  description: "Gedikli Hukuk Bürosu Resmi Web Sitesi",
+  icons: {
+    icon: "/favicon.ico/favicon.ico",
+  },
+};
 
+// ✅ Fontlar
 const libreBaskerville = Libre_Baskerville({
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -20,11 +29,7 @@ const sourceSans = Source_Sans_3({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: "Gedikli Hukuk Bürosu",
-  description: "Gedikli Hukuk Bürosu Resmi Web Sitesi",
-};
-
+// ✅ Layout bileşeni
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,9 +38,9 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${libreBaskerville.variable} ${sourceSans.variable}`}>
       <body className="antialiased font-body" suppressHydrationWarning>
-        <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}
+        <Navbar />
         {children}
-        <ScrollToTop /> {/* 👈 Bunu ekledik */}
+        <ScrollToTop />
         <Footer />
       </body>
     </html>

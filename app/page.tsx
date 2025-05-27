@@ -213,34 +213,80 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <motion.div
-                key={item}
-                variants={fadeInUp}
-                className="bg-white group hover:shadow-xl transition-all duration-500 border border-gray-100"
-              >
-                <div className="p-8">
-                  <div className="flex items-center text-gray-500 text-sm mb-4">
-                    <FaRegClock className="mr-2" />
-                    <span>21 Mayıs 2025</span>
-                  </div>
-                  <h3 className="text-xl font-light text-gray-900 mb-4 group-hover:text-rose-800 transition-colors">
-                    Güncel Hukuki Gelişmeler
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    Hukuk dünyasındaki son gelişmeler ve güncel yasal düzenlemeler
-                    hakkında bilgiler.
-                  </p>
-                  <Link
-                    href="/haberlerVeMakaleler"
-                    className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
-                  >
-                    <span className="font-medium">Devamını Oku</span>
-                    <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
-                  </Link>
+            <motion.div
+              variants={fadeInUp}
+              className="bg-white group hover:shadow-xl transition-all duration-500 border border-gray-100"
+            >
+              <div className="p-8">
+                <div className="flex items-center text-gray-500 text-sm mb-4">
+                  <FaRegClock className="mr-2" />
+                  <span>Mart 2025</span>
                 </div>
-              </motion.div>
-            ))}
+                <h3 className="text-xl font-light text-gray-900 mb-4 group-hover:text-rose-800 transition-colors">
+                  Mart | Fikri Mülkiyet Bülteni
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Günümüzde sosyal medya platformlarının etkisiyle, dizi, film ve sinema sektöründe üretilen içerikler ve tiplemelerin hukuki korunması...
+                </p>
+                <Link
+                  href="/haberlerVeMakaleler/fikri-mulkiyet"
+                  className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+                >
+                  <span className="font-medium">Devamını Oku</span>
+                  <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="bg-white group hover:shadow-xl transition-all duration-500 border border-gray-100"
+            >
+              <div className="p-8">
+                <div className="flex items-center text-gray-500 text-sm mb-4">
+                  <FaRegClock className="mr-2" />
+                  <span>Ocak 2024</span>
+                </div>
+                <h3 className="text-xl font-light text-gray-900 mb-4 group-hover:text-rose-800 transition-colors">
+                  Reklam Kurulu Aralık 2024 Kararları
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Ticaret Bakanlığı bünyesinde faaliyet gösteren Reklam Kurulu tarafından gerçekleştirilen toplantıda alınan önemli kararlar...
+                </p>
+                <Link
+                  href="/haberlerVeMakaleler/reklam-kararlari"
+                  className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+                >
+                  <span className="font-medium">Devamını Oku</span>
+                  <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="bg-white group hover:shadow-xl transition-all duration-500 border border-gray-100"
+            >
+              <div className="p-8">
+                <div className="flex items-center text-gray-500 text-sm mb-4">
+                  <FaRegClock className="mr-2" />
+                  <span>Mart 2024</span>
+                </div>
+                <h3 className="text-xl font-light text-gray-900 mb-4 group-hover:text-rose-800 transition-colors">
+                  Elektronik Ticarette Aracı Hizmet Sağlayıcılar ve Hizmet Sağlayıcılar
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  8 Mart 2025 tarihli Resmi Gazete'de yayımlanan yönetmelik değişikliği ile elektronik ticaret alanında önemli düzenlemeler...
+                </p>
+                <Link
+                  href="/haberlerVeMakaleler/e-ticaret"
+                  className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+                >
+                  <span className="font-medium">Devamını Oku</span>
+                  <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </motion.section>

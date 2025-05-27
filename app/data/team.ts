@@ -13,7 +13,7 @@ export interface TeamMember {
 export const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: "AV.ÖMER FARUK GEDİKLİ",
+    name: "AV. ÖMER FARUK GEDİKLİ",
     title: "Kurucu Avukat",
     imageSrc: "/images/team/kurucu-avukat.png",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
@@ -30,7 +30,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 2,
-    name: "AV.HİLAL KARAGÖK",
+    name: "AV. HİLAL KARAGÖK",
     title: "Uzman Avukat",
     imageSrc: "",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
@@ -47,7 +47,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 3,
-    name: "AV.ELİF SOSA",
+    name: "AV. ELİF SOSA",
     title: "Uzman Avukat",
     imageSrc: "",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
@@ -64,7 +64,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 4,
-    name: "AV.ALEYNA BAYER",
+    name: "AV. ALEYNA BAYER",
     title: "Avukat",
     imageSrc: "",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
@@ -79,7 +79,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 5,
-    name: "AV.MUSTAFA ZAHİD KAYA",
+    name: "AV. MUSTAFA ZAHİD KAYA",
     title: "Avukat",
     imageSrc: "",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
@@ -87,9 +87,9 @@ export const teamMembers: TeamMember[] = [
     phoneNumber: "+90 534 930 98 53",
     email: "mustafakaya@gediklilaw.com",
     specialties: [
-      "İş ve Sosyal Güvenlik Hukuku",
-      "Sözleşmeler Hukuku",
       "İcra ve İflas Hukuku",
+      "Sözleşmeler Hukuku",
+      "İş ve Sosyal Güvenlik Hukuku",
     ],
   },
 

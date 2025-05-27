@@ -4,6 +4,17 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+const hizmetler = [
+  { slug: 'sirketlerhukuku', name: 'Şirketler Hukuku' },
+  { slug: 'sozlesmelerhukuku', name: 'Sözleşmeler Hukuku' },
+  { slug: 'ticarethukuku', name: 'Ticaret Hukuku' },
+  { slug: 'cezahukuku', name: 'Ceza Hukuku' },
+  { slug: 'borclarhukuku', name: 'Borçlar Hukuku' },
+  { slug: 'ishukuku', name: 'İş Hukuku' },
+  { slug: 'idarevergihukuku', name: 'İdare ve Vergi Hukuku' },
+  { slug: 'icraiflashukuku', name: 'İcra ve İflas Hukuku' },
+];
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
@@ -16,7 +27,7 @@ export default function Navbar() {
     window.addEventListener('popstate', handleRouteChange);
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
-    };
+    }; 
   }, []);
 
   return (
@@ -25,11 +36,11 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-10 flex-shrink-0" onClick={() => setMobileMenuOpen(false)}>
           <div className="flex items-center">
             <Image src="/images/logo.png" alt="Logo" width={50} height={50} className="h-12 w-auto mr-3" priority />
-            <Image src="/images/Gedikli_hukuk_yazi2.png" alt="Gedikli Hukuk Yazı" width={150} height={40} className="h-8 w-auto hidden sm:block" priority />
+            <Image src="/images/Gedikli_hukuk_yazi2.png" alt="Gedikli Hukuk Yazı" width={150} height={50} className="h-8 w-44 hidden sm:block" priority />
           </div>
         </Link>
 
-        <div className="hidden lg:flex items-center space-x-16">
+        <div className="hidden lg:flex items-center space-x-18">
           <Link href="/hakkimizda" className="text-gray-600 hover:text-gray-900">Hakkımızda</Link>
           <div className="relative group">
             <button
@@ -40,14 +51,11 @@ export default function Navbar() {
             </button>
             <div className="absolute left-1/2 top-full mt-2 w-96 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 transform -translate-x-1/2 p-4 z-50">
               <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                <li><Link href="/hizmetlerimiz/sirketlerHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> Şirketler Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/sozlesmelerHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> Sözleşmeler Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/ticaretHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> Ticaret Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/cezaHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> Ceza Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/borclarHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> Borçlar Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/isHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> İş Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/idareVergiHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> İdare ve Vergi Hukuku </Link></li>
-                <li><Link href="/hizmetlerimiz/icraIflasHukuku" className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}> İcra ve İflas Hukuku </Link></li>
+                {hizmetler.map(({ slug, name }) => (
+                  <li key={slug}>
+                    <Link href={`/hizmetlerimiz/${slug}`} className="block text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded" onClick={() => setMobileMenuOpen(false)}>{name}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -68,7 +76,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className={` mt-4 lg:hidden absolute left-0 right-0 bg-white border-t  border-gray-200 transition-all duration-500 ease-in-out transform ${mobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'
+      <div className={`mt-4 lg:hidden absolute left-0 right-0 bg-white border-t border-gray-200 transition-all duration-500 ease-in-out transform ${mobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'
         }`}>
         <div className="px-6 py-4 flex flex-col space-y-4 max-w-[1400px] mx-auto">
           <Link href="/hakkimizda" className="text-gray-600 hover:text-gray-900 py-2" onClick={() => setMobileMenuOpen(false)}>Hakkımızda</Link>

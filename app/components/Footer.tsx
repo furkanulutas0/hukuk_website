@@ -32,16 +32,16 @@ export default function Footer() {
             <h3 className="text-lg md:text-xl font-light mb-2 md:mb-4 mt-2 md:mt-10">Hizmetler</h3>
             <div className="grid grid-cols-2 gap-x-6">
               <ul className="space-y-1 text-gray-400 text-sm text-right">
-                <li><a href="/hizmetlerimiz/sirketlerHukuku" className="hover:text-white">Şirketler Hukuku</a></li>
-                <li><a href="/hizmetlerimiz/sozlesmelerHukuku" className="hover:text-white">Sözleşmeler Hukuku</a></li>
-                <li><a href="/hizmetlerimiz/ticaretHukuku" className="hover:text-white">Ticaret Hukuku</a></li>
-                <li><a href="/hizmetlerimiz/cezaHukuku" className="hover:text-white">Ceza Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/sirketlerhukuku" className="hover:text-white">Şirketler Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/sozlesmelerhukuku" className="hover:text-white">Sözleşmeler Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/ticarethukuku" className="hover:text-white">Ticaret Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/cezahukuku" className="hover:text-white">Ceza Hukuku</a></li>
               </ul>
               <ul className="space-y-1 text-gray-400 text-sm text-left">
-                <li><a href="/hizmetlerimiz/borclarHukuku" className="hover:text-white">Borçlar Hukuku</a></li>
-                <li><a href="/hizmetlerimiz/isHukuku" className="hover:text-white">İş Hukuku</a></li>
-                <li><a href="/hizmetlerimiz/idareVeVergiHukuku" className="hover:text-white">İdare ve Vergi Hukuku</a></li>
-                <li><a href="/hizmetlerimiz/icraVeIflasHukuku" className="hover:text-white">İcra ve İflas Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/borclarhukuku" className="hover:text-white">Borçlar Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/ishukuku" className="hover:text-white">İş Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/idarevergihukuku" className="hover:text-white">İdare ve Vergi Hukuku</a></li>
+                <li><a href="/hizmetlerimiz/icraiflashukuku" className="hover:text-white">İcra ve İflas Hukuku</a></li>
               </ul>
             </div>
           </div>

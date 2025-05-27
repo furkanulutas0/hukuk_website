@@ -6,8 +6,12 @@ interface Params {
   name: string;
 }
 
-export default async function TeamMemberDetailPage({ params }: { params: Params }) {
-  const { name } = params;
+export default async function TeamMemberDetailPage({ 
+  params 
+}: { 
+  params: Promise<Params> 
+}) {
+  const { name } = await params;
 
   const decodedName = decodeURIComponent(name).toLowerCase();
 

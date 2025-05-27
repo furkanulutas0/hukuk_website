@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import ArticleCard from "../components/ArticleCard";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
@@ -6,21 +7,21 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 const contents = [
   {
     title: "Mart | Fikri Mülkiyet Bülteni",
-    excerpt: "Tiplemelerin Fikir ve Sanat Eserleri Kanunu kapsamındaki yeri günümüzde sosyal medya platformlarının etkisiyle, dizi, film ve sinema sektöründe üretilen içerikler...",
-    link: "/haberlerVeMakaleler/fikri-mulkiyet",
-    date: "Ocak"
+    excerpt: "Günümüzde sosyal medya platformlarının etkisiyle, dizi, film ve sinema sektöründe üretilen içerikler yalnızca içerik olarak kendileri değil, aynı zamanda içlerinde yer alan tiplemelerin fiziksel ve davranışsal özelliklerinin sosyal medya akımlarına konu olmasıyla da tanınır ve popüler hale gelmektedir. Peki tipleme nedir? Türk hukuku kapsamında tiplemeler korunabilir mi? Bu soruların cevabını vermeden önce 5846 sayılı Fikir ve Sanat Eserleri Kanunu (“FSEK”) kapsamında eserin tanımına bakmamız gerekir. Eser, “Sahibinin hususiyetini taşıyan ve ilim ve edebiyat, musiki, güzel sanatlar veya sinema eserleri olarak sayılan her nevi fikir ve sanat mahsulleri” olarak tanımlanmıştır. FSEK güzel sanat eserlerinin kapsamını ise madde 4’te düzenlemiş ve “…8) Her türlü tiplemelerdir” demekle tiplemeleri de güzel sanat eseri olarak eser kapsamına dahil etmiştir. Öğretide tipleme Arslan Kaya tarafından “Tipleme, var olan bir kişinin veya hayali bir karakterin karikatürize edilmiş, estetik değeri haiz, halk arasında tanınmışlık düzeyi yaygınlık kazanmış halidir. Tiplemelere; Avanak Avni, Deli Ziya, Temel Reis, Kötü Kedi Şerafettin, Tweety, Mickey Mouse örnekleri verilebilir.” şeklinde tanımlanmıştır. (Fikir ve Sanat Eserleri Hukuku Dersleri -1, Prof. Dr. Arslan Kaya, Filiz Kitabevi 2024)",
+    slug: "fikri-mulkiyet",
+    date: "Ocak 2025"
   },
   {
     title: "Reklam Kurulu Aralık 2024 Kararları",
     excerpt: "Ticaret Bakanlığı bünyesinde faaliyet gösteren Reklam Kurulu (“Kurul”) tarafından 12 Aralık 2024 tarihinde gerçekleştirilen ve ana gündem konusu tüketicileri aldatan...",
-    link: "/haberlerVeMakaleler/reklam-kararlari",
-    date: "Ocak"
+    slug: "reklam-kararlari",
+    date: "Ocak 2024"
   },
   {
-    title: "Elektronik Ticarette Aracı Hizmet Sağlayıcılar Mevzuatı",
-    excerpt: "8 Mart 2025 tarihli 32385 sayılı Resmi Gazete’de yayımlanan yönetmelik ile Elektronik Ticaret Aracı Hizmet Sağlayıcı ve Elektronik Ticaret Hizmet Sağlayıcılar hakkında...",
-    link: "/haberlerVeMakaleler/e-ticaret",
-    date: "Mart"
+    title: "Elektronik Ticarette Aracı Hizmet Sağlayıcılar ve Hizmet Sağlayıcılar Hakkında Güncel Mevzuat Değişikliği",
+    excerpt: "8 Mart 2025 tarihli 32385 sayılı Resmi Gazete’de, Elektronik Ticaret Aracı Hizmet Sağlayıcı ve Elektronik Ticaret Hizmet Sağlayıcılar Hakkında Yönetmelikte Değişiklik Yapılmasına Dair Yönetmelik (“Yönetmelik Değişikliği”) yayımlanmıştır. Bahse konu Yönetmelik Değişikliği kapsamında; Elektronik Ticaret Hizmet Sağlayıcıların (“ETHS”) ve Elektronik Ticaret Aracı Hizmet Sağlayıcılarının (“ETAHS”) bilgi verme yükümlülüğü, verilen bu bilgilerin ETAHS sağlayıcı tarafından doğrulanması, elektronik ticaret kapsamında haksız ticari uygulamalar, aracılık sözleşmesi, çevrim içi arama motorları ile tanıtım ve erişim imkanları, bağımsız denetim, reklam bütçeleri, denetim ve lisans başvuruları gibi konularda detaylı değişiklikler yapılmıştır. İlgili Yönetmelik Değişikliği 8 Mart 2025 tarihinde yürürlüğe girmiş olup bu yazımızda genel çerçevede yapılan güncellemelerden bahsedilecektir.",
+    slug: "e-ticaret",
+    date: "Mart 2024"
   },
 ];
 
@@ -58,7 +59,10 @@ export default function HaberlerVeMakalelerPage() {
   return (
     <section className="py-20 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-light text-gray-900 mb-8">Haberler ve Makaleler</h2>
+        <h1 className="text-5xl font-serif font-semibold text-red-800 mb-4">Haberler ve Makaleler</h1>
+        <p className="text-lg text-gray-600 mb-12">
+          Gedikli Hukuk olarak güncel gelişmeler ve hukuki değerlendirmeleri sizinle paylaşıyoruz.
+        </p>
 
         {/* Arama ve filtre */}
         <div className="flex flex-col md:flex-row md:items-center md:gap-6 mb-10">
@@ -101,7 +105,12 @@ export default function HaberlerVeMakalelerPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           {paginatedContents.length > 0 ? (
             paginatedContents.map((item, idx) => (
-              <ArticleCard key={idx} {...item} />
+              <ArticleCard
+                key={idx}
+                title={item.title}
+                excerpt={item.excerpt}
+                link={`/haberlerVeMakaleler/${item.slug}`}
+              />
             ))
           ) : (
             <p className="text-gray-500 col-span-full">Aradığınız kriterlere uygun içerik bulunamadı.</p>
@@ -114,11 +123,10 @@ export default function HaberlerVeMakalelerPage() {
             {[...Array(totalPages)].map((_, i) => (
               <button
                 key={i}
-                className={`px-3 py-1 rounded ${
-                  currentPage === i + 1
+                className={`px-3 py-1 rounded ${currentPage === i + 1
                     ? 'bg-blue-900 text-white'
                     : 'text-blue-900 hover:bg-blue-100'
-                }`}
+                  }`}
                 onClick={() => setCurrentPage(i + 1)}
               >
                 {i + 1}

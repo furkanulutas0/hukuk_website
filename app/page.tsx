@@ -1,200 +1,244 @@
-'use client'
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-
+"use client";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FaArrowRight, FaRegClock } from "react-icons/fa";
 
 // Animation variants for scroll reveal
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { 
-    opacity: 1, 
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
+    transition: { staggerChildren: 0.2 },
+  },
 };
 
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.5 },
+  },
+};
+
+const hizmetler = [
+  { title: "Borçlar Hukuku", slug: "borclarhukuku" },
+  { title: "Ceza Hukuku", slug: "cezahukuku" },
+  { title: "İcra ve İflas Hukuku", slug: "icraiflashukuku" },
+  { title: "İdare ve Vergi Hukuku", slug: "idarevergihukuku" },
+  { title: "İş Hukuku", slug: "ishukuku" },
+  { title: "Şirketler Hukuku", slug: "sirketlerhukuku" },
+  { title: "Sözleşmeler Hukuku", slug: "sozlesmelerhukuku" },
+  { title: "Ticaret Hukuku", slug: "ticarethukuku" },
+];
+
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [
-    {
-      src: '/images/Gedikli_hukuk.jpeg',
-      alt: 'Gedikli hukuk bürosu',
-      showText: false,
-      applyEffects: false
-    },
-    {
-      src: '/images/hukuk1.png',
-      alt: 'Hukuk bürosu arka plan',
-      showText: true,
-      applyEffects: true
-    }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="min-h-screen bg-white">
-      
       {/* Hero Section */}
-      <section className="relative h-[70vh] md:h-[85vh] lg:h-[85vh] overflow-hidden">
-        {/* Arka plan görseli */}
+      <section className="relative h-[60vh] sm:h-[75vh] md:h-[92vh] overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
-        <Image
-            src="/images/hukuk1.png"
-            alt="Hukuk bürosu arka plan"
+          <Image
+            src="/images/hukuk6.png"
+            alt="Gedikli Hukuk bürosu arka plan"
             fill
             sizes="100vw"
-            style={{ 
-              objectFit: 'cover',
-              objectPosition: 'center center',
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
             }}
-            className="sm:object-[center_center] md:object-[center_center] lg:object-[center_center] brightness-[0.9]"
+            className="brightness-[0.65] transform scale-105"
             priority={true}
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88/HjfwAJZAPolF7wHgAAAABJRU5ErkJggg=="
-        />
-          <div className="absolute inset-0 bg-black/40"></div>
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
         </div>
-        
-        {/* Hero İçeriği */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-20 container mx-auto h-full flex flex-col justify-center items-start px-4 md:px-6"
-        >
-          <div className="max-w-full sm:max-w-3xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 text-white max-w-2xl"
-            >
-              Hukuki çözüm ortağınız
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg md:text-xl font-light mb-6 md:mb-8 text-white max-w-xl"
-            >
-              Hukuk alanında geniş tecrübe ve hizmetler 
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
+
+        {/* Hero Content */}
+        <div className="relative z-20 container mx-auto h-full flex flex-col justify-center items-start px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="max-w-4xl"
+          >
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4 sm:mb-8 text-white leading-tight">
+              Hukuki çözüm ortağınız{" "}
+              <span className="text-gray-100 font-normal">GEDİKLİ</span>
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl font-light mb-8 sm:mb-12 text-gray-100 max-w-2xl leading-relaxed">
+              Güvenilir, şeffaf ve müvekkil odaklı yaklaşımla hukuki danışmanlık hizmetleri
+            </p>
+            <div className="flex flex-row gap-4 items-center">
               <Link href="/hakkimizda">
                 <motion.button 
-                  className="bg-white text-gray-900 px-6 sm:px-8 py-2 sm:py-3 hover:bg-gray-100 transition-colors"
+                  whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white/10 text-white border border-white/30 px-4 sm:px-8 py-2 sm:py-4 text-sm sm:text-lg transition-all duration-300 rounded-sm hover:shadow-lg backdrop-blur-sm"
                 >
                   Daha Fazla Bilgi
                 </motion.button>
               </Link>
-            </motion.div>
-          </div>
-        </motion.div>
+              <Link href="/iletisim">
+                <motion.button 
+                  whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white/10 text-white border border-white/30 px-4 sm:px-8 py-2 sm:py-4 text-sm sm:text-lg transition-all duration-300 rounded-sm hover:shadow-lg backdrop-blur-sm"
+                >
+                  İletişime Geçin
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Content Sections */}
-      <motion.section 
+      {/* Features Section */}
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="py-12 md:py-16 lg:py-20"
+        className="py-24 bg-gradient-to-b from-gray-50 to-white"
       >
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {/* Hizmetlerimiz */}
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Hizmetlerimiz</h2>
-              <p className="text-gray-600">
-                Şirketler hukuku, fikri mülkiyet, iş hukuku ve daha fazlası için kapsamlı hukuki danışmanlık hizmetleri sunuyoruz.
+            <motion.div 
+              variants={fadeInUp}
+              className="group p-10 bg-white hover:bg-gray-50 shadow-sm hover:shadow-xl transition-all duration-500 relative overflow-hidden rounded-sm"
+            >
+              <div className="absolute top-0 left-0 w-1 h-full bg-rose-800 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+              <h2 className="text-2xl font-light text-gray-900 mb-4">
+                Hizmetlerimiz
+              </h2>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Şirketler hukuku, fikri mülkiyet, iş hukuku ve daha fazlası için
+                kapsamlı hukuki danışmanlık hizmetleri sunuyoruz.
               </p>
-              <Link href="/hizmetlerimiz" className="text-gray-900 hover:underline inline-block">
-                Detaylı Bilgi →
+              <Link
+                href="/hizmetlerimiz"
+                className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+              >
+                <span className="font-medium">Detaylı Bilgi</span>
+                <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
             {/* Ekibimiz */}
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Ekibimiz</h2>
-              <p className="text-gray-600">
-                Deneyimli hukuk ekibimiz ile ulusal ve uluslararası hukuk alanında çözümler üretiyoruz.
+            <motion.div 
+              variants={fadeInUp}
+              className="group p-10 bg-white hover:bg-gray-50 shadow-sm hover:shadow-xl transition-all duration-500 relative overflow-hidden rounded-sm"
+            >
+              <div className="absolute top-0 left-0 w-1 h-full bg-rose-800 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+              <h2 className="text-2xl font-light text-gray-900 mb-4">
+                Ekibimiz
+              </h2>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Deneyimli hukuk ekibimiz ile ulusal ve uluslararası hukuk
+                alanında çözümler üretiyoruz.
               </p>
-              <Link href="/ekibimiz" className="text-gray-900 hover:underline inline-block">
-                Ekibimizi Tanıyın →
+              <Link
+                href="/ekibimiz"
+                className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+              >
+                <span className="font-medium">Ekibimizi Tanıyın</span>
+                <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Kariyer</h2>
-              <p className="text-gray-600">
-              Kariyer fırsatlarımızı keşfedin ve bizimle birlikte ulusal ve uluslararası hukuk alanında ilerleyin.
+            {/* Kariyer */}
+            <motion.div 
+              variants={fadeInUp}
+              className="group p-10 bg-white hover:bg-gray-50 shadow-sm hover:shadow-xl transition-all duration-500 relative overflow-hidden rounded-sm"
+            >
+              <div className="absolute top-0 left-0 w-1 h-full bg-rose-800 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+              <h2 className="text-2xl font-light text-gray-900 mb-4">
+                Kariyer
+              </h2>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Kariyer fırsatlarımızı keşfedin ve bizimle birlikte ulusal ve
+                uluslararası hukuk alanında ilerleyin.
               </p>
-              <Link href="/kariyer" className="text-gray-900 hover:underline inline-block">
-                Detaylı Bilgi →
+              <Link
+                href="/kariyer"
+                className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+              >
+                <span className="font-medium">Fırsatları Keşfedin</span>
+                <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
-
           </div>
         </div>
       </motion.section>
 
       {/* Latest News Section */}
-      <motion.section 
+      <motion.section
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true }}
         variants={staggerContainer}
-        className="py-12 md:py-16 lg:py-20 bg-gray-50"
+        className="py-24 bg-white"
       >
         <div className="container mx-auto px-4 md:px-6">
-          <motion.h2 
+          <motion.div 
             variants={fadeInUp}
-            className="text-2xl md:text-3xl font-light text-gray-900 mb-8 md:mb-12"
+            className="flex justify-between items-end mb-16"
           >
-            Son Haberler ve Makaleler
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-3">
+                Son Haberler ve Makaleler
+              </h2>
+              <p className="text-gray-600">Hukuk dünyasındaki son gelişmeler</p>
+            </div>
+            <Link
+              href="/haberlerVeMakaleler"
+              className="text-rose-800 hover:text-rose-900 transition-colors hidden md:flex items-center group"
+            >
+              <span className="font-medium">Tümünü Gör</span>
+              <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[1, 2, 3].map((item) => (
-              <motion.div 
-                key={item} 
+              <motion.div
+                key={item}
                 variants={fadeInUp}
-                className="bg-white p-6 space-y-4"
+                className="bg-white group hover:shadow-xl transition-all duration-500 border border-gray-100"
               >
-                <span className="text-sm text-gray-500">21 Mayıs 2025</span>
-                <h3 className="text-lg md:text-xl font-light text-gray-900">Güncel Hukuki Gelişmeler</h3>
-                <p className="text-gray-600">
-                  Hukuk dünyasındaki son gelişmeler ve güncel yasal düzenlemeler hakkında bilgiler.
-                </p>
-                <Link href="/haberlerVeMakaleler" className="text-gray-900 hover:underline inline-block">
-                  Devamını Oku →
-                </Link>
+                <div className="p-8">
+                  <div className="flex items-center text-gray-500 text-sm mb-4">
+                    <FaRegClock className="mr-2" />
+                    <span>21 Mayıs 2025</span>
+                  </div>
+                  <h3 className="text-xl font-light text-gray-900 mb-4 group-hover:text-rose-800 transition-colors">
+                    Güncel Hukuki Gelişmeler
+                  </h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    Hukuk dünyasındaki son gelişmeler ve güncel yasal düzenlemeler
+                    hakkında bilgiler.
+                  </p>
+                  <Link
+                    href="/haberlerVeMakaleler"
+                    className="inline-flex items-center text-rose-800 hover:text-rose-900 transition-colors group"
+                  >
+                    <span className="font-medium">Devamını Oku</span>
+                    <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -202,45 +246,39 @@ export default function Home() {
       </motion.section>
 
       {/* Expertise Areas Section */}
-      <motion.section 
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="py-12 md:py-16 lg:py-20"
+        className="py-24 bg-gray-50"
       >
         <div className="container mx-auto px-4 md:px-6">
-          <motion.h2 
+          <motion.h2
             variants={fadeInUp}
-            className="text-2xl md:text-3xl font-light text-gray-900 mb-8 md:mb-12"
+            className="text-2xl md:text-3xl font-light text-gray-900 mb-12 text-center"
           >
             Uzmanlık Alanlarımız
           </motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-            {[
-              "Borçlar Hukuku",
-              "Ceza Hukuku",
-              "İcra ve İflas Hukuku",
-              "İdare ve Vergi Hukuku",
-              "İş Hukuku",
-              "Şirketler Hukuku",
-              "Sözleşmeler Hukuku",
-              "Ticaret Hukuku"
-            ].map((area, index) => (
-              <motion.div 
-                key={index} 
-                variants={fadeInUp}
-                className="border-l-2 border-gray-200 pl-4 py-2 hover:border-gray-900 transition-colors"
-          >
-                <h3 className="text-base md:text-lg font-light text-gray-900">{area}</h3>
-              </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
+            {hizmetler.map((hizmet, index) => (
+              <Link key={index} href={`/hizmetlerimiz/${hizmet.slug}`}>
+                <motion.div
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="cursor-pointer border-l-2 border-gray-200 pl-6 py-4 hover:border-rose-800 transition-all duration-300 group bg-white hover:shadow-md"
+                >
+                  <h3 className="text-base md:text-lg font-light text-gray-900 group-hover:text-rose-800 transition-colors">
+                    {hizmet.title}
+                  </h3>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
       </motion.section>
-
-     
-
     </div>
   );
 }

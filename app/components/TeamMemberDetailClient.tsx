@@ -1,18 +1,11 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Image from "next/image";
-
-interface TeamMember {
-  name: string;
-  title: string;
-  imageSrc?: string;
-  description?: string;
-  specialties?: string[];
-  email?: string;
-  linkedinUrl?: string;
-}
+import { TeamMember } from '../data/team';
+import LoginForm from './LoginForm';
 
 interface Props {
   member: TeamMember;
@@ -23,7 +16,7 @@ const fadeInUp = {
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
@@ -33,13 +26,30 @@ const staggerContainer = {
     opacity: 1,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
     },
   },
 };
 
 export default function TeamMemberDetailClient({ member }: Props) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const hasImage = !!member.imageSrc;
+
+  useEffect(() => {
+    // Sayfa yüklendiğinde authentication durumunu kontrol et
+    const authStatus = localStorage.getItem('isAuthenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (success: boolean) => {
+    setIsAuthenticated(success);
+  };
+
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
 
   return (
     <motion.div

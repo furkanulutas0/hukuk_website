@@ -1,9 +1,11 @@
 'use client'
+import { useState, useEffect } from 'react';
 import TeamMemberCard from '../components/TeamMemberCard';
 import TeamMemberCardNoImage from '../components/TeamMemberCardNoImage';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
 import { teamMembers } from '../data/team';
+import LoginForm from '../components/LoginForm';
 
 // Animation variants
 const fadeInUp = {
@@ -30,6 +32,24 @@ const staggerContainer = {
 };
 
 export default function Team() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Sayfa yüklendiğinde authentication durumunu kontrol et
+    const authStatus = localStorage.getItem('isAuthenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (success: boolean) => {
+    setIsAuthenticated(success);
+  };
+
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
   // Find the member with image
   const memberWithImage = teamMembers.find(member => member.imageSrc);
   // Get all members without images

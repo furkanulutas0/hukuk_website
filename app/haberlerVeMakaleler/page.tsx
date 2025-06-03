@@ -29,8 +29,8 @@ const contents = [
 
 // Animation variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { 
+  initial: { opacity: 0, y: 40 },
+  animate: { 
     opacity: 1, 
     y: 0,
     transition: {
@@ -41,10 +41,11 @@ const fadeInUp = {
 };
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
     transition: {
+      when: "beforeChildren",
       staggerChildren: 0.2
     }
   }
@@ -101,12 +102,14 @@ export default function HaberlerVeMakalelerPage() {
       />
 
       {/* Main Content Section */}
-      <section className="py-12 md:py-16 lg:py-20">
+      <motion.section 
+        className="py-12 md:py-16 lg:py-20"
+        initial="initial"
+        animate="animate"
+        variants={staggerContainer}
+      >
         <motion.div 
           className="container mx-auto px-4 md:px-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
           <div className="max-w-6xl mx-auto">
@@ -150,21 +153,24 @@ export default function HaberlerVeMakalelerPage() {
               </div>
             </motion.div>
 
-        {/* Kartlar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
-          {paginatedContents.length > 0 ? (
-            paginatedContents.map((item, idx) => (
-              <ArticleCard
-                key={idx}
-                title={item.title}
-                excerpt={item.excerpt}
-                link={`/haberlerVeMakaleler/${item.slug}`}
-              />
-            ))
-          ) : (
-            <p className="text-gray-500 col-span-full">Aradığınız kriterlere uygun içerik bulunamadı.</p>
-          )}
-        </div>
+            {/* Articles Grid */}
+            <motion.div 
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredContents.map((article, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp}
+                >
+                  <ArticleCard
+                    title={article.title}
+                    excerpt={article.excerpt}
+                    link={`/haberlerVeMakaleler/${article.slug}`}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
 
             {/* Pagination */}
             {totalPages > 1 && (
@@ -189,7 +195,7 @@ export default function HaberlerVeMakalelerPage() {
             )}
           </div>
         </motion.div>
-      </section>
+      </motion.section>
     </div>
   );
 }

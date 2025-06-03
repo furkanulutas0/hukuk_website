@@ -7,8 +7,8 @@ import { FaArrowRight, FaRegClock } from "react-icons/fa";
 
 // Animation variants for scroll reveal
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
+  initial: { opacity: 0, y: 40 },
+  animate: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.5, ease: "easeOut" },
@@ -16,16 +16,19 @@ const fadeInUp = {
 };
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 },
+    transition: { 
+      when: "beforeChildren",
+      staggerChildren: 0.2 
+    },
   },
 };
 
 const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
     transition: { duration: 0.5 },
   },
@@ -46,10 +49,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[75vh] md:h-[92vh] overflow-hidden">
+      <motion.section
+        initial="initial"
+        animate="animate"
+        variants={staggerContainer}
+        className="relative h-[60vh] sm:h-[75vh] md:h-[92vh] overflow-hidden"
+      >
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
-          <Image
+        <Image
             src="/images/hukuk6.png"
             alt="Gedikli Hukuk bürosu arka plan"
             fill
@@ -69,9 +77,7 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-20 container mx-auto h-full flex flex-col justify-center items-start px-4 md:px-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            variants={fadeInUp}
             className="max-w-4xl"
           >
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4 sm:mb-8 text-white leading-tight">
@@ -103,13 +109,13 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Features Section */}
       <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
         variants={staggerContainer}
         className="py-24 bg-gradient-to-b from-gray-50 to-white"
       >
@@ -186,8 +192,8 @@ export default function Home() {
 
       {/* Latest News Section */}
       <motion.section
-        initial="hidden"
-        whileInView="visible"
+        initial="initial"
+        whileInView="animate"
         viewport={{ once: true }}
         variants={staggerContainer}
         className="py-24 bg-white"
@@ -293,9 +299,9 @@ export default function Home() {
 
       {/* Expertise Areas Section */}
       <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
         variants={staggerContainer}
         className="py-24 bg-gray-50"
       >

@@ -19,8 +19,8 @@ interface Props {
 }
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
+  initial: { opacity: 0, y: 40 },
+  animate: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: "easeOut" },
@@ -28,10 +28,11 @@ const fadeInUp = {
 };
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
     transition: {
+      when: "beforeChildren",
       staggerChildren: 0.2,
     },
   },
@@ -43,15 +44,12 @@ export default function TeamMemberDetailClient({ member }: Props) {
   return (
     <motion.div
       className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16 px-4 md:px-8"
-      initial="hidden"
-      animate="visible"
+      initial="initial"
+      animate="animate"
       variants={staggerContainer}
     >
       <motion.div
         className="max-w-4xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
         variants={fadeInUp}
       >
         {/* Header Section */}

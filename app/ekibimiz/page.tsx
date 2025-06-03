@@ -7,8 +7,8 @@ import { teamMembers } from '../data/team';
 
 // Animation variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { 
+  initial: { opacity: 0, y: 40 },
+  animate: { 
     opacity: 1, 
     y: 0,
     transition: {
@@ -19,10 +19,11 @@ const fadeInUp = {
 };
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
     transition: {
+      when: "beforeChildren",
       staggerChildren: 0.15
     }
   }
@@ -37,33 +38,34 @@ export default function Team() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
-      <div className="relative bg-gray-900 text-white py-24 px-4">
+      <motion.div 
+        className="relative bg-gray-900 text-white py-24 px-4"
+        initial="initial"
+        animate="animate"
+        variants={staggerContainer}
+      >
         <div className="absolute inset-0 bg-[url('/images/hukuk2.png')] opacity-20 bg-cover bg-center" />
         <div className="relative max-w-6xl mx-auto text-center">
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-6xl mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={fadeInUp}
           >
             Ekibimiz
           </motion.h1>
           <motion.p 
             className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={fadeInUp}
           >
             Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın.
           </motion.p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Team Members Section */}
       <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
         variants={staggerContainer}
         className="py-20 px-4"
       >

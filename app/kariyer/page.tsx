@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 
 // Animation variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
+  initial: { opacity: 0, y: 40 },
+  animate: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: "easeOut" },
@@ -15,10 +15,11 @@ const fadeInUp = {
 };
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
     transition: {
+      when: "beforeChildren",
       staggerChildren: 0.2,
     },
   },
@@ -158,28 +159,25 @@ export default function Kariyer() {
       />
 
       {/* Main Career Content */}
-      <section className="py-12 md:py-16 lg:py-20">
+      <motion.section 
+        className="py-12 md:py-16 lg:py-20"
+        initial="initial"
+        animate="animate"
+        variants={staggerContainer}
+      >
         <motion.div 
           className="container mx-auto px-4 md:px-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Career Information */}
             <motion.div variants={fadeInUp}>
               <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-6">Neden Gedikli Hukuk?</h2>
-              
               <div className="space-y-6 text-gray-600">
                 <motion.p variants={fadeInUp}>
-                  Gedikli Hukuk Bürosu olarak, hukuki çözümler sunma konusundaki tutkumuz ve kararlılığımızla, 
-                  sektörde öncü konumumuzu sürdürüyoruz. Müvekkillerimizin ihtiyaçlarına özel çözümler 
-                  sunarken, ekibimizin gelişimine ve mesleki tatminine de büyük önem veriyoruz.
+                  Gedikli Hukuk olarak, hukuk dünyasının dinamik yapısına ayak uyduran, yenilikçi ve çözüm odaklı bir yaklaşım benimsiyoruz. Ekibimize katılacak yeni üyelerimize sunduğumuz avantajlar:
                 </motion.p>
-                
-                <motion.h3 variants={fadeInUp} className="text-xl font-medium text-[#9B1B30] mt-8">Sunduğumuz Avantajlar</motion.h3>
-                <motion.ul variants={staggerContainer} className="space-y-3 mt-4">
+                <motion.ul variants={staggerContainer} className="space-y-4 text-gray-600">
                   <li className="flex items-start">
                     <svg className="w-5 h-5 text-[#9B1B30] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
@@ -239,12 +237,8 @@ export default function Kariyer() {
             </motion.div>
             
             {/* Current Openings */}
-            <motion.div 
-              variants={fadeInUp}
-              className="bg-gray-50 p-6 md:p-8 rounded-lg"
-            >
+            <motion.div variants={fadeInUp} className="bg-gray-50 p-6 md:p-8 rounded-lg">
               <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-6">Açık Pozisyonlar</h2>
-              
               <motion.div variants={staggerContainer} className="space-y-6">
                 <motion.div 
                   variants={cardHover}
@@ -269,9 +263,13 @@ export default function Kariyer() {
                       Tam Zamanlı
                     </span>
                   </div>
-                  <button className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Detayları Görüntüle
-                  </button>
+                  </motion.button>
                 </motion.div>
 
                 <motion.div 
@@ -297,9 +295,13 @@ export default function Kariyer() {
                       Tam Zamanlı
                     </span>
                   </div>
-                  <button className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Detayları Görüntüle
-                  </button>
+                  </motion.button>
                 </motion.div>
 
                 <motion.div 
@@ -325,9 +327,13 @@ export default function Kariyer() {
                       Tam Zamanlı
                     </span>
                   </div>
-                  <button className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Detayları Görüntüle
-                  </button>
+                  </motion.button>
                 </motion.div>
               </motion.div>
 
@@ -354,15 +360,14 @@ export default function Kariyer() {
             </motion.div>
           </div>
         </motion.div>
-      </section>
+      </motion.section>
 
       {/* Application Form Section */}
       <section id="application-form" className="py-12 md:py-16 lg:py-20 bg-gray-50">
         <motion.div 
           className="container mx-auto px-4 md:px-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          initial="initial"
+          animate="animate"
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="max-w-3xl mx-auto">

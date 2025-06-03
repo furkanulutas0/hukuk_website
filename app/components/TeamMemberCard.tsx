@@ -35,10 +35,10 @@ export default function TeamMemberCard({
           {imageSrc && (
             <>
               <img
-                src={imageSrc}
-                alt={name}
+        src={imageSrc}
+        alt={name}
                 className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-              />
+      />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
             </>
           )}
@@ -46,7 +46,7 @@ export default function TeamMemberCard({
             <h3 className="text-xl font-bold mb-2">{name}</h3>
             <p className="text-gray-200 text-sm">{title}</p>
           </div>
-        </Link>
+            </Link>
       </div>
 
       <div className="p-6 bg-white flex-1 flex flex-col justify-between">

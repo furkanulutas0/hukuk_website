@@ -61,57 +61,73 @@ export default function About() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
         </div>
+
         <motion.div
           variants={fadeInUp}
           className="relative z-10 container mx-auto h-full flex flex-col justify-center items-center px-4 md:px-6"
         >
           <motion.h1
             variants={fadeInUp}
-            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-8 sm:mb-12 text-center tracking-wide"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 sm:mb-10 text-center tracking-wide"
           >
             Hikayemiz
           </motion.h1>
+
+          {/* Ömer Faruk Gedikli'nin Fotoğrafı */}
+          <motion.div
+            variants={fadeInUp}
+            className="mb-10 w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg"
+          >
+            <Image
+              src="/images/team/kurucu-avukat.png" // 👈 dosya adını buraya koy (örnek: public/images/kurucu.png)
+              alt="Av. Ömer Faruk Gedikli"
+              width={192}
+              height={192}
+              className="object-cover w-full h-full"
+            />
+          </motion.div>
+
+          {/* Paragraflar */}
           <motion.div
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl"
           >
             <motion.div variants={fadeInUp} className="space-y-6">
               <p className="font-body text-base md:text-lg text-gray-200 leading-relaxed">
-                Gedikli Hukuk Bürosu'nun hikayesi, 2024 Kasım ayında deneyim,
-                tutku ve kararlılıkla başlayan yeni bir yolculuktur. Kurucumuz
-                Av. Ömer Faruk Gedikli, uzun yıllar süren akademik ve mesleki
-                birikimini, farklı hukuk disiplinlerinde edindiği derin
-                uzmanlıkla birleştirerek, çağın gereksinimlerine uygun, çözüm
-                odaklı ve kapsamlı bir hukuk ofisi kurmayı amaçlamıştır.
+                Gedikli Hukuk Bürosu'nun hikayesi, 2024 Kasım ayında deneyim, tutku ve
+                kararlılıkla başlayan yeni bir yolculuktur. Kurucumuz Av. Ömer Faruk
+                Gedikli, uzun yıllar süren akademik ve mesleki birikimini, farklı hukuk
+                disiplinlerinde edindiği derin uzmanlıkla birleştirerek, çağın
+                gereksinimlerine uygun, çözüm odaklı ve kapsamlı bir hukuk ofisi kurmayı
+                amaçlamıştır.
               </p>
               <p className="font-body text-base md:text-lg text-gray-200 leading-relaxed">
                 Büromuz, kuruluşundan itibaren sadece hukuki süreçlerde değil,
                 müvekkillerimizin iş hayatlarında da güvenilir bir rehber olmayı
-                hedeflemektedir. Şirketler hukuku, ticaret hukuku, iş hukuku,
-                ceza hukuku gibi pek çok farklı alanda hizmet veren ekibimiz,
-                her dosyayı özel ve titizlikle ele alarak kişiye ve kuruma özgü
-                stratejiler geliştirmektedir.
+                hedeflemektedir. Şirketler hukuku, ticaret hukuku, iş hukuku, ceza hukuku
+                gibi pek çok farklı alanda hizmet veren ekibimiz, her dosyayı özel ve
+                titizlikle ele alarak kişiye ve kuruma özgü stratejiler geliştirmektedir.
               </p>
             </motion.div>
             <motion.div variants={fadeInUp} className="space-y-6">
               <p className="font-body text-base md:text-lg text-gray-200 leading-relaxed">
-                Geniş kapsamlı hizmet anlayışımız, sadece hukuki konularla
-                sınırlı kalmayıp müvekkillerimizin iş dünyasındaki ihtiyaçlarını
-                bütüncül şekilde kavramaya dayanır. Bu yaklaşım sayesinde, zorlu
-                hukuki süreçlerde en doğru ve etkin çözümleri sunarak,
-                müvekkillerimizin başarısına katkıda bulunmayı amaçlıyoruz.
+                Geniş kapsamlı hizmet anlayışımız, sadece hukuki konularla sınırlı
+                kalmayıp müvekkillerimizin iş dünyasındaki ihtiyaçlarını bütüncül şekilde
+                kavramaya dayanır. Bu yaklaşım sayesinde, zorlu hukuki süreçlerde en
+                doğru ve etkin çözümleri sunarak, müvekkillerimizin başarısına katkıda
+                bulunmayı amaçlıyoruz.
               </p>
               <p className="font-body text-base md:text-lg text-gray-200 leading-relaxed">
-                Gedikli Hukuk Bürosu, yenilikçi vizyonu ve güçlü işbirlikleriyle
-                Türkiye'de güvenilir bir hukuk ortağı olma yolunda emin
-                adımlarla ilerlemektedir. Geniş kapsamlı hikayemiz, her gün daha
-                da büyüyen tecrübemiz ve müvekkillerimize olan bağlılığımızla
-                yazılmaya devam ediyor.
+                Gedikli Hukuk Bürosu, yenilikçi vizyonu ve güçlü işbirlikleriyle Türkiye'de
+                güvenilir bir hukuk ortağı olma yolunda emin adımlarla ilerlemektedir.
+                Geniş kapsamlı hikayemiz, her gün daha da büyüyen tecrübemiz ve
+                müvekkillerimize olan bağlılığımızla yazılmaya devam ediyor.
               </p>
             </motion.div>
           </motion.div>
         </motion.div>
       </motion.section>
+
 
       {/* Hakkımızda Section */}
       <motion.section

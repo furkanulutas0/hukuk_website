@@ -4,6 +4,11 @@ import { useLocalization } from '../context/LocalizationContext';
 
 export default function Footer() {
   const { t } = useLocalization();
+  
+  if (!t) {
+    console.warn('Localization context not available in Footer');
+    return null; // or render a fallback
+  }
 
   return (
     <footer className="bg-gray-900 text-white py-4 md:py-10">

@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import { LocalizationProvider } from "./context/LocalizationContext";
+import { LocalizationProvider, useLocalization } from "./context/LocalizationContext";
 
 
 const libreBaskerville = Libre_Baskerville({
@@ -31,8 +31,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { language } = useLocalization();
   return (
-    <html lang="tr" className={`${libreBaskerville.variable} ${sourceSans.variable}`}>
+    <html lang={language || "tr"} className={`${libreBaskerville.variable} ${sourceSans.variable}`}>
       <body className="antialiased font-body" suppressHydrationWarning>
         <LocalizationProvider>
           <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}

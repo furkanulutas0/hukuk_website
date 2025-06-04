@@ -6,6 +6,10 @@ import { useLocalization } from '../context/LocalizationContext';
 
 export default function Services() {
   const { t } = useLocalization();
+  
+  if (!t) {
+    console.warn('Localization context not available in Services page');
+  }
 
   return (
     <div className="min-h-screen bg-white">

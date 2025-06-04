@@ -10,6 +10,11 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const { t } = useLocalization();
+  
+  if (!t) {
+    console.warn('Localization context not available in Navbar');
+    // Consider returning a fallback navbar or null
+  }
 
   useEffect(() => {
     const handleRouteChange = () => {

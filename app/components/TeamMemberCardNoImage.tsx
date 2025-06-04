@@ -1,12 +1,14 @@
 // components/TeamMemberCardNoImage.tsx
+"use client";
+
 import Link from "next/link";
+import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-interface TeamMemberProps {
+interface Props {
   name: string;
   title: string;
   linkedinUrl?: string;
-  description?: string;
   email?: string;
   specialties?: string[];
 }
@@ -15,64 +17,55 @@ export default function TeamMemberCardNoImage({
   name,
   title,
   linkedinUrl,
-  description,
   email,
   specialties,
-}: TeamMemberProps) {
-  const slug = name.toLowerCase().replace(/\s+/g, "-");
+}: Props) {
+  const formattedName = name.toLowerCase().replace(/\s+/g, "-");
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="bg-white rounded-lg overflow-hidden shadow-md text-center hover:shadow-lg min-h-[280px]"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
+      className="group bg-white rounded-xl min-h-52 shadow-md overflow-hidden border border-gray-100 hover:shadow-lg"
     >
-      <Link href={`/ekibimiz/${slug}`} className="block p-4">
-        <h3 className="text-lg text-rose-800 font-semibold">{name}</h3>
-        <p className="text-sm text-gray-600 mb-2">{title}</p>
-      </Link>
-
-      <div className="px-4">
-        {description && (
-          <p className="text-sm text-gray-600 mb-2">{description}</p>
-        )}
+      <div className="p-6">
+        <Link
+          href={`/ekibimiz/${formattedName}`}
+          className="block mb-4"
+        >
+          <h3 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-rose-800 transition-colors">
+            {name}
+          </h3>
+          <p className="text-sm text-gray-600">{title}</p>
+        </Link>
 
         {specialties && specialties.length > 0 && (
-          <div className="mb-2">
-            <div className="flex flex-wrap gap-1 justify-center">
-              {specialties.map((specialty, index) => (
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-2">
+              {specialties.slice(0, 2).map((specialty, index) => (
                 <span
                   key={index}
-                  className="text-xs bg-rose-50 text-rose-800 px-2 py-1 rounded-full"
+                  className="bg-rose-50 text-rose-800 px-3 py-1 rounded-full text-xs font-medium"
                 >
                   {specialty}
                 </span>
               ))}
+              {specialties.length > 2 && (
+                <span className="text-gray-500 text-xs">+{specialties.length - 2} daha</span>
+              )}
             </div>
           </div>
         )}
 
-        <div className="flex items-center pt-4 pb-4 justify-center gap-2 mt-2">
+        <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+          <div className="flex items-center gap-2">
           {email && (
             <a
               href={`mailto:${email}`}
-              className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-[#9B1B30] hover:text-white transition-colors"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+                className="text-gray-500 hover:text-rose-800 transition-colors p-2 -ml-2"
+                onClick={(e) => e.stopPropagation()}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+                <FaEnvelope className="w-4 h-4" />
             </a>
           )}
           {linkedinUrl && (
@@ -80,13 +73,19 @@ export default function TeamMemberCardNoImage({
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-[#9B1B30] hover:text-white transition-colors"
+                className="text-gray-500 hover:text-rose-800 transition-colors p-2"
+                onClick={(e) => e.stopPropagation()}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
-              </svg>
+                <FaLinkedin className="w-4 h-4" />
             </a>
           )}
+          </div>
+          <Link
+            href={`/ekibimiz/${formattedName}`}
+            className="ml-auto text-sm font-medium text-rose-800 hover:text-rose-900 transition-colors"
+          >
+            Detaylı Bilgi
+          </Link>
         </div>
       </div>
     </motion.div>

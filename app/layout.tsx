@@ -6,6 +6,13 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { LocalizationProvider, useLocalization } from "./context/LocalizationContext";
 
+export const metadata: Metadata = {
+  title: "Gedikli Hukuk Bürosu",
+  description: "Gedikli Hukuk Bürosu Resmi Web Sitesi",
+  icons: {
+    icon: "/favicon.ico/favicon.ico",
+  },
+};
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ['latin'],
@@ -21,11 +28,6 @@ const sourceSans = Source_Sans_3({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: "Gedikli Hukuk Bürosu",
-  description: "Gedikli Hukuk Bürosu Resmi Web Sitesi",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,9 +40,10 @@ export default function RootLayout({
         <LocalizationProvider>
           <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}
           {children}
-          <ScrollToTop /> {/* 👈 Bunu ekledik */}
+          <ScrollToTop /> 
           <Footer />
         </LocalizationProvider>
+
       </body>
     </html>
   );

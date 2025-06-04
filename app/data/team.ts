@@ -27,6 +27,7 @@ export const teamMembers: TeamMember[] = [
       tr: "Kurucu Avukat",
       en: "Founding Lawyer"
     },
+
     imageSrc: "/images/team/kurucu-avukat.png",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
     description: {
@@ -151,6 +152,7 @@ export const teamMembers: TeamMember[] = [
       tr: "Avukat",
       en: "Lawyer"
     },
+
     imageSrc: "",
     linkedinUrl: "https://linkedin.com/in/ahmetgedikli",
     description: {
@@ -171,6 +173,7 @@ export const teamMembers: TeamMember[] = [
         "Execution and Bankruptcy Law",
       ]
     },
+
   },
 
   {

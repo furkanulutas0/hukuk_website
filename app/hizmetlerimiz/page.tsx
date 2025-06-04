@@ -13,8 +13,10 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-white">
-
-     
+      <PageHeaderCard
+        title="Çalışma Alanlarımız"
+        description="Gedikli Hukuk, küresel gelişmeler doğrultusunda gelişen departmanlardan oluşan özel bölümlere ev sahipliği yapmaktadır."
+      />     
       <PageHeaderCard 
                 title={t.services.title}
                 description={t.services.description}
@@ -112,11 +114,17 @@ export default function Services() {
               </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Contact CTA Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
+        </div>
+      </motion.section>
+
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="py-12 md:py-16 lg:py-20 bg-white"
+      >
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-light mb-4 md:mb-6 lg:mb-8 text-gray-900">
@@ -126,14 +134,19 @@ export default function Services() {
               {t.services.contactCTA.description}
             </p>
             <a
+
               href="/iletisim"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
               className="inline-block bg-[#9B1B30] text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-light hover:bg-[#7d1626] transition-colors"
             >
               {t.services.contactCTA.button}
             </a>
+
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
-} 
+}

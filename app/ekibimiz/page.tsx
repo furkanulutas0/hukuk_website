@@ -1,4 +1,5 @@
 'use client'
+import { useState, useEffect } from 'react';
 import TeamMemberCard from '../components/TeamMemberCard';
 import TeamMemberCardNoImage from '../components/TeamMemberCardNoImage';
 import { motion } from 'framer-motion';
@@ -6,25 +7,27 @@ import PageHeaderCard from '../components/PageHeaderCard';
 import { getLocalizedTeamMembers } from '../data/team';
 import { useLocalization } from '../context/LocalizationContext';
 
+
 // Animation variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { 
+  initial: { opacity: 0, y: 40 },
+  animate: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.6,
       ease: "easeOut"
     }
   }
 };
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+  initial: { opacity: 0 },
+  animate: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      when: "beforeChildren",
+      staggerChildren: 0.15
     }
   }
 };
@@ -53,44 +56,61 @@ export default function Team() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="py-12 md:py-16 lg:py-20 flex justify-center gap-8 flex-wrap"
-      >
-        {membersWithImage.map((member, index) => (
-          <motion.div
-            key={index}
-            variants={fadeInUp}
-            className="max-w-xs"
-          >
-            <TeamMemberCard
-              name={member.name}
-              title={member.title}
-              imageSrc={member.imageSrc}
-              linkedinUrl={member.linkedinUrl}
-              email={member.email}
-              specialties={member.specialties}
-            />
-          </motion.div>
-        ))}
-      </motion.section>
 
-      {/* Resimsiz üyeler - Altta grid şeklinde */}
-      <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="py-12 md:py-16 lg:py-20"
       >
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-          <motion.div 
-            variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        <div className="absolute inset-0 bg-[url('/images/hukuk2.png')] opacity-20 bg-cover bg-center" />
+        <div className="relative max-w-6xl mx-auto text-center">
+          <motion.h1 
+            className="text-4xl md:text-5xl lg:text-6xl mb-6"
+            variants={fadeInUp}
           >
+            Ekibimiz
+          </motion.h1>
+          <motion.p 
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto"
+            variants={fadeInUp}
+          >
+            Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın.
+          </motion.p>
+        </div>
+      </motion.div>
+
+      {/* Team Members Section */}
+      <motion.section 
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+        className="py-20 px-4"
+      >
+        <div className="max-w-6xl mx-auto">
+          {/* Member with Image - Centered at Top */}
+          {memberWithImage && (
+            <div className="flex justify-center mb-12">
+              <motion.div
+                variants={fadeInUp}
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+              >
+                <TeamMemberCard
+                  name={memberWithImage.name}
+                  title={memberWithImage.title}
+                  imageSrc={memberWithImage.imageSrc}
+                  linkedinUrl={memberWithImage.linkedinUrl}
+                  email={memberWithImage.email}
+                  specialties={memberWithImage.specialties}
+                />
+              </motion.div>
+            </div>
+          )}
+
+          {/* Members without Images - Grid Layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {membersWithoutImage.map((member, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
+                className="col-span-1"
               >
                 <TeamMemberCardNoImage
                   name={member.name}
@@ -101,7 +121,7 @@ export default function Team() {
                 />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </motion.section>
     </div>

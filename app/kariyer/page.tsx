@@ -2,6 +2,39 @@
 import Image from 'next/image';
 import PageHeaderCard from '../components/PageHeaderCard';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+// Animation variants
+const fadeInUp = {
+  initial: { opacity: 0, y: 40 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const staggerContainer = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardHover = {
+  rest: { scale: 1 },
+  hover: { 
+    scale: 1.02,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
 
 export default function Kariyer() {
   const [formData, setFormData] = useState({
@@ -126,23 +159,25 @@ export default function Kariyer() {
       />
 
       {/* Main Career Content */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4 md:px-6">
+      <motion.section 
+        className="py-12 md:py-16 lg:py-20"
+        initial="initial"
+        animate="animate"
+        variants={staggerContainer}
+      >
+        <motion.div 
+          className="container mx-auto px-4 md:px-6"
+          variants={staggerContainer}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Career Information */}
-            <div>
+            <motion.div variants={fadeInUp}>
               <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-6">Neden Gedikli Hukuk?</h2>
-              
               <div className="space-y-6 text-gray-600">
-                <p>
-                  Gedikli Hukuk Bürosu olarak, hukuki çözümler sunma konusundaki tutkumuz ve kararlılığımızla, 
-                  sektörde öncü konumumuzu sürdürüyoruz. Müvekkillerimizin ihtiyaçlarına özel çözümler 
-                  sunarken, ekibimizin gelişimine ve mesleki tatminine de büyük önem veriyoruz.
-                </p>
-                
-                <h3 className="text-xl font-medium text-[#9B1B30] mt-8">Sunduğumuz Avantajlar</h3>
-                <ul className="space-y-3 mt-4">
-                
+                <motion.p variants={fadeInUp}>
+                  Gedikli Hukuk olarak, hukuk dünyasının dinamik yapısına ayak uyduran, yenilikçi ve çözüm odaklı bir yaklaşım benimsiyoruz. Ekibimize katılacak yeni üyelerimize sunduğumuz avantajlar:
+                </motion.p>
+                <motion.ul variants={staggerContainer} className="space-y-4 text-gray-600">
                   <li className="flex items-start">
                     <svg className="w-5 h-5 text-[#9B1B30] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
@@ -161,13 +196,12 @@ export default function Kariyer() {
                     </svg>
                     <span>Kariyerinizde ilerleme ve uzmanlaşma fırsatları</span>
                   </li>
-                 
-                </ul>
+                </motion.ul>
               </div>
 
-              <div className="mt-10">
+              <motion.div variants={fadeInUp} className="mt-10">
                 <h3 className="text-xl font-medium text-[#9B1B30]">Kimlerle Çalışmak İstiyoruz?</h3>
-                <ul className="space-y-3 mt-4 text-gray-600">
+                <motion.ul variants={staggerContainer} className="space-y-3 mt-4 text-gray-600">
                   <li className="flex items-start">
                     <svg className="w-5 h-5 text-[#9B1B30] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -198,16 +232,20 @@ export default function Kariyer() {
                     </svg>
                     <span>İngilizce başta olmak üzere yabancı dil bilgisine sahip</span>
                   </li>
-                </ul>
-              </div>
-            </div>
+                </motion.ul>
+              </motion.div>
+            </motion.div>
             
             {/* Current Openings */}
-            <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
+            <motion.div variants={fadeInUp} className="bg-gray-50 p-6 md:p-8 rounded-lg">
               <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-6">Açık Pozisyonlar</h2>
-              
-              <div className="space-y-6">
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+              <motion.div variants={staggerContainer} className="space-y-6">
+                <motion.div 
+                  variants={cardHover}
+                  whileHover="hover"
+                  initial="rest"
+                  className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+                >
                   <h3 className="text-lg font-medium text-[#9B1B30]">Kıdemli Avukat - Şirketler Hukuku</h3>
                   <p className="text-gray-600 mt-2">En az 5 yıl şirketler hukuku alanında deneyimli, ulusal ve uluslararası şirketler ile çalışma tecrübesine sahip avukat arıyoruz.</p>
                   <div className="mt-4 flex items-center text-sm text-gray-500">
@@ -225,12 +263,21 @@ export default function Kariyer() {
                       Tam Zamanlı
                     </span>
                   </div>
-                  <button className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Detayları Görüntüle
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
 
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                <motion.div 
+                  variants={cardHover}
+                  whileHover="hover"
+                  initial="rest"
+                  className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+                >
                   <h3 className="text-lg font-medium text-[#9B1B30]">Avukat - Uyuşmazlık Çözümü</h3>
                   <p className="text-gray-600 mt-2">Uyuşmazlık çözümü alanında 2-4 yıl deneyimli, dava yönetimi ve tahkim süreçlerinde tecrübeli avukat arıyoruz.</p>
                   <div className="mt-4 flex items-center text-sm text-gray-500">
@@ -248,12 +295,21 @@ export default function Kariyer() {
                       Tam Zamanlı
                     </span>
                   </div>
-                  <button className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Detayları Görüntüle
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
 
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                <motion.div 
+                  variants={cardHover}
+                  whileHover="hover"
+                  initial="rest"
+                  className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+                >
                   <h3 className="text-lg font-medium text-[#9B1B30]">Stajyer Avukat</h3>
                   <p className="text-gray-600 mt-2">Hukuk fakültesi son sınıf öğrencileri veya yeni mezunlar arasından, öğrenmeye açık ve dinamik stajyer avukatlar arıyoruz.</p>
                   <div className="mt-4 flex items-center text-sm text-gray-500">
@@ -271,43 +327,73 @@ export default function Kariyer() {
                       Tam Zamanlı
                     </span>
                   </div>
-                  <button className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-4 text-[#9B1B30] border border-[#9B1B30] hover:bg-[#9B1B30] hover:text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                  >
                     Detayları Görüntüle
-                  </button>
-                </div>
-              </div>
+                  </motion.button>
+                </motion.div>
+              </motion.div>
 
-              <div className="mt-8 p-6 bg-white rounded-lg border border-gray-200">
+              <motion.div 
+                variants={fadeInUp}
+                className="mt-8 p-6 bg-white rounded-lg border border-gray-200"
+              >
                 <h3 className="text-lg font-medium text-[#9B1B30] mb-4">Açık Pozisyon Bulunamadı mı?</h3>
                 <p className="text-gray-600">
                   Açık pozisyonlarımız arasında size uygun bir fırsat bulamadıysanız, özgeçmişinizi bize gönderin. Uygun bir pozisyon açıldığında sizinle iletişime geçelim.
                 </p>
-                <button className="mt-4 bg-[#9B1B30] text-white hover:bg-[#7d1626] px-4 py-2 rounded-md transition-colors text-sm font-medium">
+                <button 
+                  onClick={() => {
+                    const formSection = document.getElementById('application-form');
+                    if (formSection) {
+                      formSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="mt-4 bg-[#9B1B30] text-white hover:bg-[#7d1626] px-4 py-2 rounded-md transition-colors text-sm font-medium"
+                >
                   Özgeçmişimi Gönder
                 </button>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Application Form Section */}
       <section id="application-form" className="py-12 md:py-16 lg:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-8 text-center">Başvuru Formu</h2>
-            <p className="text-gray-600 text-center mb-8">
+        <motion.div 
+          className="container mx-auto px-4 md:px-6"
+          initial="initial"
+          animate="animate"
+          variants={staggerContainer}
+        >
+          <motion.div variants={fadeInUp} className="max-w-3xl mx-auto">
+            <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl font-light text-gray-900 mb-8 text-center">
+              Başvuru Formu
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-gray-600 text-center mb-8">
               Ekibimize katılmak için aşağıdaki formu doldurarak başvurunuzu yapabilirsiniz. 
               Başvurunuz incelendikten sonra uygun görülürse sizinle iletişime geçeceğiz.
-            </p>
+            </motion.p>
 
             {submitStatus && (
-              <div className={`mb-6 p-4 rounded-md ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mb-6 p-4 rounded-md ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}
+              >
                 {submitStatus.message}
-              </div>
+              </motion.div>
             )}
             
-            <form onSubmit={handleSubmit} className="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+            <motion.form 
+              variants={fadeInUp}
+              onSubmit={handleSubmit} 
+              className="bg-white p-6 md:p-8 rounded-lg shadow-sm"
+            >
               <div className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
@@ -471,9 +557,9 @@ export default function Kariyer() {
                   </button>
                 </div>
               </div>
-            </form>
-          </div>
-        </div>
+            </motion.form>
+          </motion.div>
+        </motion.div>
       </section>
     </div>
   );

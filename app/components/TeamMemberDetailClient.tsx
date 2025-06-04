@@ -1,118 +1,157 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-
-interface TeamMember {
-  name: string;
-  title: string;
-  imageSrc?: string;
-  description?: string;
-  specialties?: string[];
-  email?: string;
-  linkedinUrl?: string;
-}
+import { FaLinkedin, FaEnvelope } from "react-icons/fa";
+import Image from "next/image";
+import { TeamMember } from '../data/team';
+import LoginForm from './LoginForm';
 
 interface Props {
   member: TeamMember;
 }
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
+  initial: { opacity: 0, y: 40 },
+  animate: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
+const staggerContainer = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.15,
+    },
+  },
+};
+
 export default function TeamMemberDetailClient({ member }: Props) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const hasImage = !!member.imageSrc;
+
+  useEffect(() => {
+    // Sayfa yüklendiğinde authentication durumunu kontrol et
+    const authStatus = localStorage.getItem('isAuthenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (success: boolean) => {
+    setIsAuthenticated(success);
+  };
+
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
 
   return (
     <motion.div
-      className="min-h-screen bg-white py-12 px-4 md:px-8"
-      initial="hidden"
-      animate="visible"
-      variants={fadeInUp}
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16 px-4 md:px-8"
+      initial="initial"
+      animate="animate"
+      variants={staggerContainer}
     >
       <motion.div
-        className="max-w-5xl mx-auto bg-gray-50 p-8 rounded-lg shadow"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-4xl mx-auto"
         variants={fadeInUp}
       >
-        <div
-          className={`flex gap-8 ${
-            hasImage ? "flex-col md:flex-row" : "flex-col items-center text-center"
-          }`}
-        >
-          {hasImage && (
-            <motion.div
-              className="md:w-1/2 flex flex-col items-center"
-              variants={fadeInUp}
-            >
-              <img
-                src={member.imageSrc}
-                alt={member.name}
-                className="h-96 object-cover rounded-lg mb-4"
-              />
-              <h1 className="text-3xl font-bold text-rose-800 mb-3 text-center">
-                {member.name}
-              </h1>
-              <h2 className="text-xl text-gray-600">{member.title}</h2>
-            </motion.div>
-          )}
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <div className="w-16 h-0.5 bg-rose-800 mx-auto mb-8" />
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {member.name}
+          </h1>
+          <h2 className="text-xl text-rose-800 font-medium">{member.title}</h2>
+        </div>
 
-          {!hasImage && (
-            <motion.div className="mb-6" variants={fadeInUp}>
-              <h1 className="text-3xl font-bold text-rose-800 mb-2">{member.name}</h1>
-              <h2 className="text-xl text-gray-600">{member.title}</h2>
-            </motion.div>
-          )}
-
-          <motion.div
-            className={hasImage ? "md:w-1/2 flex flex-col justify-between" : ""}
-            variants={fadeInUp}
-          >
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line mb-6">
-              {member.description || "Açıklama bulunmamaktadır."}
-            </p>
-
-            {member.specialties && (
-              <div className="flex flex-wrap gap-2 mb-6 justify-center">
-                {member.specialties.map((spec, index) => (
-                  <span
-                    key={index}
-                    className="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm"
-                  >
-                    {spec}
-                  </span>
-                ))}
-              </div>
+        {/* Main Content */}
+        <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className={`flex flex-col ${hasImage ? 'lg:flex-row' : ''} items-start`}>
+            {/* Image Section */}
+            {hasImage && (
+              <motion.div
+                className="w-full lg:w-2/5 relative"
+                variants={fadeInUp}
+              >
+                <div className="relative h-[400px] lg:h-full w-full">
+                  <img
+                    src={member.imageSrc}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
+              </motion.div>
             )}
 
-            <div className="flex gap-4 items-center justify-center">
-              {member.email && (
-                <a
-                  href={`mailto:${member.email}`}
-                  className="text-sm text-gray-700 hover:text-rose-800 underline"
-                >
-                  📧 {member.email}
-                </a>
+            {/* Content Section */}
+            <motion.div
+              className={`${hasImage ? 'lg:w-3/5' : 'w-full'} p-8 lg:p-12`}
+              variants={fadeInUp}
+            >
+              {/* Description */}
+              <div className="prose prose-lg max-w-none">
+                <p className="text-gray-700 leading-relaxed">
+                  {member.description || "Açıklama bulunmamaktadır."}
+                </p>
+              </div>
+
+              {/* Specialties */}
+              {member.specialties && member.specialties.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Uzmanlık Alanları
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {member.specialties.map((spec, index) => (
+                      <span
+                        key={index}
+                        className="bg-rose-50 text-rose-800 px-4 py-1.5 rounded-full text-sm font-medium"
+                      >
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               )}
-              {member.linkedinUrl && (
-                <a
-                  href={member.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-700 hover:text-rose-800 underline"
-                >
-                  🔗 LinkedIn
-                </a>
-              )}
-            </div>
-          </motion.div>
+
+              {/* Contact Section */}
+              <div className="mt-8 pt-8 border-t border-gray-100">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  İletişim
+                </h3>
+                <div className="flex gap-4 items-center">
+                  {member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="flex items-center gap-2 text-gray-600 hover:text-rose-800 transition-colors"
+                    >
+                      <FaEnvelope className="w-5 h-5" />
+                      <span className="text-sm">{member.email}</span>
+                    </a>
+                  )}
+                  {member.linkedinUrl && (
+                    <a
+                      href={member.linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-gray-600 hover:text-rose-800 transition-colors"
+                    >
+                      <FaLinkedin className="w-5 h-5" />
+                      <span className="text-sm">LinkedIn Profili</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
     </motion.div>

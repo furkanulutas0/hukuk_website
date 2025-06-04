@@ -4,8 +4,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import { LocalizationProvider, useLocalization } from "./context/LocalizationContext";
 
+// ✅ Tek bir metadata objesi olacak!
 export const metadata: Metadata = {
   title: "Gedikli Hukuk Bürosu",
   description: "Gedikli Hukuk Bürosu Resmi Web Sitesi",
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
 };
 
+// ✅ Fontlar
 const libreBaskerville = Libre_Baskerville({
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -28,22 +29,19 @@ const sourceSans = Source_Sans_3({
   display: 'swap',
 });
 
+// ✅ Layout bileşeni
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { language } = useLocalization();
   return (
-    <html lang={language || "tr"} className={`${libreBaskerville.variable} ${sourceSans.variable}`}>
+    <html lang="tr" className={`${libreBaskerville.variable} ${sourceSans.variable}`}>
       <body className="antialiased font-body" suppressHydrationWarning>
-        <LocalizationProvider>
-          <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}
-          {children}
-          <ScrollToTop /> 
-          <Footer />
-        </LocalizationProvider>
-
+        <Navbar />
+        {children}
+        <ScrollToTop />
+        <Footer />
       </body>
     </html>
   );

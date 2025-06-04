@@ -4,9 +4,8 @@ import TeamMemberCard from '../components/TeamMemberCard';
 import TeamMemberCardNoImage from '../components/TeamMemberCardNoImage';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
-import { getLocalizedTeamMembers } from '../data/team';
-import { useLocalization } from '../context/LocalizationContext';
-
+import { teamMembers } from '../data/team';
+import LoginForm from '../components/LoginForm';
 
 // Animation variants
 const fadeInUp = {
@@ -33,30 +32,36 @@ const staggerContainer = {
 };
 
 export default function Team() {
-  const { t, language } = useLocalization();
-  
-  // Get localized team members
-  const localizedTeamMembers = getLocalizedTeamMembers(language);
-  
-  // Resimli üyeler
-  const membersWithImage = localizedTeamMembers.filter(member => member.imageSrc);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Resimsiz üyeler
-  const membersWithoutImage = localizedTeamMembers.filter(member => !member.imageSrc);
+  useEffect(() => {
+    // Sayfa yüklendiğinde authentication durumunu kontrol et
+    const authStatus = localStorage.getItem('isAuthenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (success: boolean) => {
+    setIsAuthenticated(success);
+  };
+
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
+  // Find the member with image
+  const memberWithImage = teamMembers.find(member => member.imageSrc);
+  // Get all members without images
+  const membersWithoutImage = teamMembers.filter(member => !member.imageSrc);
 
   return (
-    <div className="min-h-screen bg-white">
-      <PageHeaderCard 
-        title={t.navigation.team}
-        description={language === 'tr' ? "Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın." : "We provide legal solutions with our expert staff. Meet the successful team of Gedikli Law."}
-      />
-
-      {/* Resimli üyeler - Üstte, ortalanmış ve satır halinde */}
-      <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Hero Section */}
+      <motion.div 
+        className="relative bg-gray-900 text-white py-24 px-4"
+        initial="initial"
+        animate="animate"
         variants={staggerContainer}
       >
         <div className="absolute inset-0 bg-[url('/images/hukuk2.png')] opacity-20 bg-cover bg-center" />

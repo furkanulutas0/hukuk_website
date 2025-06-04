@@ -1,15 +1,19 @@
+'use client'
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import PageHeaderCard from '../components/PageHeaderCard';
+import { useLocalization } from '../context/LocalizationContext';
 
 export default function Services() {
+  const { t } = useLocalization();
+
   return (
     <div className="min-h-screen bg-white">
 
      
       <PageHeaderCard 
-                title="Çalışma Alanlarımız"
-                description="Gedikli Hukuk, küresel gelişmeler doğrultusunda gelişen departmanlardan oluşan özel bölümlere ev sahipliği yapmaktadır."
+                title={t.services.title}
+                description={t.services.description}
             />
 
       {/* Practice Areas Grid */}
@@ -18,89 +22,89 @@ export default function Services() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
             {/* Şirketler Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Şirketler Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.corporateLaw.title}</h3>
               <p className="text-gray-600 mb-6">
-                Şirket kuruluşları, birleşme ve devralmalar, ortaklık yapılandırmaları ve kurumsal yönetim konularında danışmanlık.
+                {t.services.areas.corporateLaw.description}
               </p>
               <a href="/hizmetlerimiz/a" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* Fikri Mülkiyet Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Fikri Mülkiyet Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.intellectualProperty.title}</h3>
               <p className="text-gray-600 mb-6">
-                Patent, marka, tasarım hakları, telif hakları ve lisanslama konularında hukuki danışmanlık.
+                {t.services.areas.intellectualProperty.description}
               </p>
               <a href="/hizmetlerimiz/b" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* İş Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">İş Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.laborLaw.title}</h3>
               <p className="text-gray-600 mb-6">
-                İş sözleşmeleri, toplu iş hukuku, iş uyuşmazlıkları ve sosyal güvenlik konularında danışmanlık.
+                {t.services.areas.laborLaw.description}
               </p>
               <a href="/hizmetlerimiz/c" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* Vergi Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Vergi Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.taxLaw.title}</h3>
               <p className="text-gray-600 mb-6">
-                Vergi planlaması, vergi uyuşmazlıkları ve uluslararası vergi hukuku konularında danışmanlık.
+                {t.services.areas.taxLaw.description}
               </p>
               <a href="/hizmetlerimiz/d" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* Gayrimenkul Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Gayrimenkul Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.realEstate.title}</h3>
               <p className="text-gray-600 mb-6">
-                Gayrimenkul alım-satımı, kira hukuku, imar hukuku ve gayrimenkul projeleri konularında danışmanlık.
+                {t.services.areas.realEstate.description}
               </p>
               <a href="/hizmetlerimiz/e" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* Enerji Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Enerji Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.energyLaw.title}</h3>
               <p className="text-gray-600 mb-6">
-                Enerji projeleri, lisanslama, düzenleyici işlemler ve enerji sözleşmeleri konularında danışmanlık.
+                {t.services.areas.energyLaw.description}
               </p>
               <a href="/hizmetlerimiz/f" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* Rekabet Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Rekabet Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.competitionLaw.title}</h3>
               <p className="text-gray-600 mb-6">
-                Rekabet uyum programları, birleşme devralma işlemleri ve rekabet soruşturmaları konularında danışmanlık.
+                {t.services.areas.competitionLaw.description}
               </p>
               <a href="/hizmetlerimiz/g" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
 
             {/* Bankacılık ve Finans Hukuku */}
             <div className="bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">Bankacılık ve Finans Hukuku</h3>
+              <h3 className="text-xl md:text-2xl font-light text-[#9B1B30] mb-3 md:mb-4">{t.services.areas.bankingFinance.title}</h3>
               <p className="text-gray-600 mb-6">
-                Finansal işlemler, krediler, sermaye piyasası işlemleri ve finansal regülasyon konularında danışmanlık.
+                {t.services.areas.bankingFinance.description}
               </p>
               <a href="/hizmetlerimiz/h" className="text-[#9B1B30] hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.services.detailedInfo}
               </a>
             </div>
           </div>
@@ -112,16 +116,16 @@ export default function Services() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-light mb-4 md:mb-6 lg:mb-8 text-gray-900">
-              Hukuki Danışmanlık İçin Bize Ulaşın
+              {t.services.contactCTA.title}
             </h2>
             <p className="text-lg md:text-xl font-light text-gray-600 mb-8 md:mb-10 lg:mb-12">
-              Deneyimli ekibimiz ile size en uygun hukuki çözümleri sunmak için hazırız.
+              {t.services.contactCTA.description}
             </p>
             <a
               href="/iletisim"
               className="inline-block bg-[#9B1B30] text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-light hover:bg-[#7d1626] transition-colors"
             >
-              İletişime Geçin
+              {t.services.contactCTA.button}
             </a>
           </div>
         </div>

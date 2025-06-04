@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+import { useLocalization } from '../context/LocalizationContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
@@ -21,6 +23,7 @@ const staggerContainer = {
 };
 
 export default function Contact() {
+  const { t, language } = useLocalization();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -52,6 +55,8 @@ export default function Contact() {
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
       });
+      // Add current language to form data
+      formDataToSend.append('language', language);
 
       const response = await fetch('/api/send-contact', {
         method: 'POST',
@@ -63,7 +68,7 @@ export default function Contact() {
       if (response.ok) {
         setSubmitStatus({
           type: 'success',
-          message: 'Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.'
+          message: t.contact.form.successMessage
         });
         // Form'u temizle
         setFormData({
@@ -86,7 +91,7 @@ export default function Contact() {
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'Mesajınız gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
+        message: t.contact.form.errorMessage
       });
     } finally {
       setIsSubmitting(false);
@@ -96,10 +101,9 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       <PageHeaderCard
-        title="İletişim"
-        description="Hukuki danışmanlık için bize ulaşın, size en iyi çözümleri sunalım."
+        title={t.contact.title}
+        description={t.contact.description}
       />
-
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -112,10 +116,10 @@ export default function Contact() {
             {/* LEFT */}
             <motion.div variants={staggerContainer} className="space-y-6 md:space-y-8">
               <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl font-light text-gray-900 md:mb-2">
-                Bize Ulaşın
+                {t.contact.reachOut}
               </motion.h2>
               <motion.p variants={fadeInUp} className="text-gray-600">
-                Hukuki ihtiyaçlarınız için bizimle iletişime geçin. Size en uygun çözümü sunalım.
+                {t.contact.reachOutDescription}
               </motion.p>
 
               <motion.div variants={staggerContainer} className="space-y-5 mt-8">
@@ -127,7 +131,7 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                     ),
-                    title: "Adres",
+                    title: t.contact.address,
                     content: "Koşuyolu Mahallesi Cenap Şehabettin Sokak No:124 Kadıköy/İSTANBUL"
                   },
                   {
@@ -136,7 +140,7 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     ),
-                    title: "E-posta",
+                    title: t.contact.email,
                     content: "info@gediklilaw.com"
                   },
                   {
@@ -145,7 +149,7 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                     ),
-                    title: "Telefon",
+                    title: t.contact.phone,
                     content: "0 (216) 545 85 55"
                   }
                 ].map((item, index) => (
@@ -161,7 +165,7 @@ export default function Contact() {
 
               {/* Sosyal Medya */}
               <motion.div variants={fadeInUp} className="mt-10">
-                <h3 className="text-base md:text-lg font-medium text-gray-900 mb-4">Bizi Takip Edin</h3>
+                <h3 className="text-base md:text-lg font-medium text-gray-900 mb-4">{t.contact.followUs}</h3>
                 <motion.div variants={staggerContainer} className="flex space-x-4">
                   <motion.a
                     variants={fadeInUp}
@@ -179,10 +183,10 @@ export default function Contact() {
                 </motion.div>
               </motion.div>
             </motion.div>
-
+            
             {/* FORM */}
             <motion.div variants={fadeInUp} id="contact-form" className="bg-gray-50 p-6 md:p-8 rounded-lg">
-              <motion.h2 variants={fadeInUp} className="text-xl md:text-2xl font-light text-gray-900 mb-6">Mesaj Gönder</motion.h2>
+              <motion.h2 variants={fadeInUp} className="text-xl md:text-2xl font-light text-gray-900 mb-6">{t.contact.sendMessage}</motion.h2>
 
               {submitStatus && (
                 <div className={`mb-6 p-4 rounded-md ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
@@ -190,13 +194,10 @@ export default function Contact() {
                 </div>
               )}
 
-
-
-
               <motion.form variants={staggerContainer} onSubmit={handleSubmit} className="space-y-6">
                 <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">Ad</label>
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">{t.contact.form.firstName}</label>
                     <input
                       type="text"
                       id="firstName" 
@@ -208,7 +209,7 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">{t.contact.form.lastName}</label>
                     <input 
                       type="text" 
                       id="lastName" 
@@ -221,10 +222,8 @@ export default function Contact() {
                   </div>
                 </motion.div>
 
-             
-
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t.contact.form.email}</label>
                   <input
                     type="email"
                     id="email"
@@ -233,11 +232,11 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
-                  /> 
-                   </motion.div>
+                  />
+                </motion.div>
 
-                   <motion.div variants={fadeInUp}>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                <motion.div variants={fadeInUp}>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t.contact.form.phone}</label>
                   <input 
                     type="phone" 
                     id="phone" 
@@ -248,9 +247,9 @@ export default function Contact() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
                   />
                 </motion.div>
-
+                
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Konu</label>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">{t.contact.form.subject}</label>
                   <select 
                     id="subject" 
                     name="subject" 
@@ -259,24 +258,22 @@ export default function Contact() {
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
                   >
-
-                    <option value="">Seçiniz</option>
-                    <option value="genel-bilgi">Genel Bilgi</option>
-                    <option value="sirketler-hukuku">Şirketler Hukuku</option>
-                    <option value="sozlesmeler-hukuku">Sözleşmeler Hukuku</option>
-                    <option value="ticaret-hukuku">Ticaret Hukuku</option>
-                    <option value="ceza-hukuku">Ceza Hukuku</option>
-                    <option value="borclar-hukuku">Borçlar Hukuku</option>
-                    <option value="is-hukuku">İş Hukuku</option>
-                    <option value="idare-hukuku">İdare ve Vergi Hukuku</option>
-                    <option value="icra-hukuku">İcra ve İflas Hukuku</option>
-                    <option value="diger">Diğer</option>
+                    <option value="">{t.contact.form.selectSubject}</option>
+                    <option value="genel-bilgi">{t.contact.form.subjects.generalInfo}</option>
+                    <option value="sirketler-hukuku">{t.contact.form.subjects.corporateLaw}</option>
+                    <option value="sozlesmeler-hukuku">{t.contact.form.subjects.contractLaw}</option>
+                    <option value="ticaret-hukuku">{t.contact.form.subjects.commercialLaw}</option>
+                    <option value="ceza-hukuku">{t.contact.form.subjects.criminalLaw}</option>
+                    <option value="borclar-hukuku">{t.contact.form.subjects.obligationsLaw}</option>
+                    <option value="is-hukuku">{t.contact.form.subjects.laborLaw}</option>
+                    <option value="idare-hukuku">{t.contact.form.subjects.administrativeTaxLaw}</option>
+                    <option value="icra-hukuku">{t.contact.form.subjects.executionBankruptcyLaw}</option>
+                    <option value="diger">{t.contact.form.subjects.other}</option>
                   </select>
                 </motion.div>
 
-
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mesajınız</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">{t.contact.form.message}</label>
                   <textarea
                     id="message"
                     name="message" 
@@ -286,32 +283,32 @@ export default function Contact() {
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#9B1B30] focus:border-[#9B1B30] focus:outline-none text-black"
                   ></textarea>
-                    </motion.div>
-
+                </motion.div>
+                
                 <motion.div variants={fadeInUp} className="flex items-center">
                   <input id="privacy-policy" name="privacy-policy" type="checkbox" required className="h-4 w-4 text-[#9B1B30] border-gray-300 rounded focus:ring-[#9B1B30]" />
                   <label htmlFor="privacy-policy" className="ml-2 block text-sm text-gray-700">
-                    <span>Kişisel verilerin işlenmesine ilişkin </span>
+                    <span>{t.contact.form.privacyPolicy} </span>
                     <button
                       type="button"
                       onClick={() => setIsModalOpen(true)}
                       className="text-[#9B1B30] hover:underline"
                     >
-                      aydınlatma metnini
+                      {t.contact.form.privacyPolicyText}
                     </button>
-                    <span> okudum ve kabul ediyorum.</span>
+                    <span> {t.contact.form.privacyPolicyAccept}</span>
                   </label>
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                <motion.button
+                  <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isSubmitting}
                     className={`w-full bg-[#9B1B30] text-white py-3 px-4 rounded-md hover:bg-[#7d1626] transition-colors focus:outline-none focus:ring-2 focus:ring-[#9B1B30] focus:ring-opacity-50 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
-                    {isSubmitting ? 'Gönderiliyor...' : 'Gönder'}
+                    {isSubmitting ? t.contact.form.sending : t.contact.form.send}
                   </motion.button>
                 </motion.div>
               </motion.form>
@@ -321,7 +318,7 @@ export default function Contact() {
       </motion.section>
 
       {/* Google Map */}
-      <motion.section
+      <motion.section 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -329,11 +326,11 @@ export default function Contact() {
         className="py-12 md:py-16 lg:py-20 bg-gray-50"
       >
         <div className="container mx-auto px-4 md:px-6">
-          <motion.h2
+          <motion.h2 
             variants={fadeInUp}
             className="text-2xl md:text-3xl font-light text-gray-900 mb-8 text-center"
           >
-            Lokasyonumuz
+            {t.contact.location}
           </motion.h2>
           <motion.div
             variants={fadeInUp}
@@ -357,15 +354,15 @@ export default function Contact() {
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white max-w-3xl w-full p-6 rounded shadow-lg relative">
             <button onClick={() => setIsModalOpen(false)} className="absolute top-3 right-4 text-gray-600 text-xl">&times;</button>
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Aydınlatma Metni</h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">{t.contact.privacyModal.title}</h2>
             <div className="text-sm text-gray-700 space-y-4 leading-relaxed max-h-[60vh] overflow-y-auto">
-              <p><strong>1. Veri Sorumlusunun Kimliği:</strong><br />Gedikli Hukuk Bürosu olarak, kişisel verilerinizin korunmasına büyük önem veriyoruz.</p>
-              <p><strong>2. Kişisel Verilerin İşlenme Amaçları:</strong><br />İletişim formu aracılığıyla toplanan kişisel verileriniz; taleplerinizi değerlendirmek, sizinle iletişime geçmek ve hizmetlerimizi geliştirmek amacıyla işlenmektedir.</p>
-              <p><strong>3. İşlenen Kişisel Veriler:</strong><br />Ad, soyad, e-posta adresi, telefon numarası ve mesaj içeriğiniz gibi veriler işlenmektedir.</p>
-              <p><strong>4. Toplanma Yöntemi ve Hukuki Sebep:</strong><br />Verileriniz elektronik ortamda, iletişim formu vasıtasıyla, meşru menfaat hukuki sebebine dayalı olarak toplanmaktadır.</p>
-              <p><strong>5. Verilerin Aktarımı:</strong><br />Yalnızca hizmet amaçlı ve yasal yükümlülükler gereği sınırlı olarak aktarılabilir.</p>
-              <p><strong>6. KVKK Kapsamındaki Haklarınız:</strong><br />KVKK 11. madde kapsamında kişisel verilerinize ilişkin her türlü bilgiye ulaşma, düzeltme, silme, işlenmesini engelleme ve itiraz etme hakkına sahipsiniz.</p>
-              <p><strong>7. İletişim:</strong><br />info@gediklilaw.com adresine başvurarak haklarınızı kullanabilirsiniz.</p>
+              <p><strong>{t.contact.privacyModal.content.dataController}</strong><br />{t.contact.privacyModal.content.dataControllerText}</p>
+              <p><strong>{t.contact.privacyModal.content.processingPurposes}</strong><br />{t.contact.privacyModal.content.processingPurposesText}</p>
+              <p><strong>{t.contact.privacyModal.content.personalData}</strong><br />{t.contact.privacyModal.content.personalDataText}</p>
+              <p><strong>{t.contact.privacyModal.content.collectionMethod}</strong><br />{t.contact.privacyModal.content.collectionMethodText}</p>
+              <p><strong>{t.contact.privacyModal.content.dataTransfer}</strong><br />{t.contact.privacyModal.content.dataTransferText}</p>
+              <p><strong>{t.contact.privacyModal.content.rights}</strong><br />{t.contact.privacyModal.content.rightsText}</p>
+              <p><strong>{t.contact.privacyModal.content.contact}</strong><br />{t.contact.privacyModal.content.contactText}</p>
             </div>
           </div>
         </div>

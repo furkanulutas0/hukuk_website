@@ -3,7 +3,8 @@ import TeamMemberCard from '../components/TeamMemberCard';
 import TeamMemberCardNoImage from '../components/TeamMemberCardNoImage';
 import { motion } from 'framer-motion';
 import PageHeaderCard from '../components/PageHeaderCard';
-import { teamMembers } from '../data/team';
+import { getLocalizedTeamMembers } from '../data/team';
+import { useLocalization } from '../context/LocalizationContext';
 
 // Animation variants
 const fadeInUp = {
@@ -29,17 +30,22 @@ const staggerContainer = {
 };
 
 export default function Team() {
+  const { t, language } = useLocalization();
+  
+  // Get localized team members
+  const localizedTeamMembers = getLocalizedTeamMembers(language);
+  
   // Resimli üyeler
-  const membersWithImage = teamMembers.filter(member => member.imageSrc);
+  const membersWithImage = localizedTeamMembers.filter(member => member.imageSrc);
 
   // Resimsiz üyeler
-  const membersWithoutImage = teamMembers.filter(member => !member.imageSrc);
+  const membersWithoutImage = localizedTeamMembers.filter(member => !member.imageSrc);
 
   return (
     <div className="min-h-screen bg-white">
       <PageHeaderCard 
-        title="Ekibimiz"
-        description="Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın."
+        title={t.navigation.team}
+        description={language === 'tr' ? "Uzman kadromuz ile hukuki çözümler üretiyoruz. Gedikli Hukuk'un başarılı ekibiyle tanışın." : "We provide legal solutions with our expert staff. Meet the successful team of Gedikli Law."}
       />
 
       {/* Resimli üyeler - Üstte, ortalanmış ve satır halinde */}

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import { LocalizationProvider } from "./context/LocalizationContext";
 
 
 const libreBaskerville = Libre_Baskerville({
@@ -33,10 +34,12 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${libreBaskerville.variable} ${sourceSans.variable}`}>
       <body className="antialiased font-body" suppressHydrationWarning>
-        <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}
-        {children}
-        <ScrollToTop /> {/* 👈 Bunu ekledik */}
-        <Footer />
+        <LocalizationProvider>
+          <Navbar /> {/* Tüm sayfalarda görünmesini sağlayan kısım */}
+          {children}
+          <ScrollToTop /> {/* 👈 Bunu ekledik */}
+          <Footer />
+        </LocalizationProvider>
       </body>
     </html>
   );

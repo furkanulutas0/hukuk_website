@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useLocalization } from './context/LocalizationContext';
 
 
 // Animation variants for scroll reveal
@@ -30,6 +31,7 @@ const staggerContainer = {
 };
 
 export default function Home() {
+  const { t } = useLocalization();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     {
@@ -92,7 +94,7 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 text-white max-w-2xl"
             >
-              Hukuki çözüm ortağınız
+              {t.home.heroTitle}
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -100,7 +102,7 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-lg md:text-xl font-light mb-6 md:mb-8 text-white max-w-xl"
             >
-              Hukuk alanında geniş tecrübe ve hizmetler 
+              {t.home.heroSubtitle}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -111,7 +113,7 @@ export default function Home() {
                 <motion.button 
                   className="bg-white text-gray-900 px-6 sm:px-8 py-2 sm:py-3 hover:bg-gray-100 transition-colors"
                 >
-                  Daha Fazla Bilgi
+                  {t.home.moreInfoButton}
                 </motion.button>
               </Link>
             </motion.div>
@@ -131,33 +133,33 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {/* Hizmetlerimiz */}
             <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Hizmetlerimiz</h2>
+              <h2 className="text-xl md:text-2xl font-light text-gray-900">{t.home.servicesSection.title}</h2>
               <p className="text-gray-600">
-                Şirketler hukuku, fikri mülkiyet, iş hukuku ve daha fazlası için kapsamlı hukuki danışmanlık hizmetleri sunuyoruz.
+                {t.home.servicesSection.description}
               </p>
               <Link href="/hizmetlerimiz" className="text-gray-900 hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.home.servicesSection.detailedInfo}
               </Link>
             </motion.div>
 
             {/* Ekibimiz */}
             <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Ekibimiz</h2>
+              <h2 className="text-xl md:text-2xl font-light text-gray-900">{t.home.teamSection.title}</h2>
               <p className="text-gray-600">
-                Deneyimli hukuk ekibimiz ile ulusal ve uluslararası hukuk alanında çözümler üretiyoruz.
+                {t.home.teamSection.description}
               </p>
               <Link href="/ekibimiz" className="text-gray-900 hover:underline inline-block">
-                Ekibimizi Tanıyın →
+                {t.home.teamSection.meetTeam}
               </Link>
             </motion.div>
 
             <motion.div variants={fadeInUp} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-light text-gray-900">Kariyer</h2>
+              <h2 className="text-xl md:text-2xl font-light text-gray-900">{t.home.careerSection.title}</h2>
               <p className="text-gray-600">
-              Kariyer fırsatlarımızı keşfedin ve bizimle birlikte ulusal ve uluslararası hukuk alanında ilerleyin.
+                {t.home.careerSection.description}
               </p>
               <Link href="/kariyer" className="text-gray-900 hover:underline inline-block">
-                Detaylı Bilgi →
+                {t.home.careerSection.detailedInfo}
               </Link>
             </motion.div>
 
@@ -178,7 +180,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-2xl md:text-3xl font-light text-gray-900 mb-8 md:mb-12"
           >
-            Son Haberler ve Makaleler
+            {t.home.newsSection.title}
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[1, 2, 3].map((item) => (
@@ -188,12 +190,12 @@ export default function Home() {
                 className="bg-white p-6 space-y-4"
               >
                 <span className="text-sm text-gray-500">21 Mayıs 2025</span>
-                <h3 className="text-lg md:text-xl font-light text-gray-900">Güncel Hukuki Gelişmeler</h3>
+                <h3 className="text-lg md:text-xl font-light text-gray-900">{t.home.newsSection.articleTitle}</h3>
                 <p className="text-gray-600">
-                  Hukuk dünyasındaki son gelişmeler ve güncel yasal düzenlemeler hakkında bilgiler.
+                  {t.home.newsSection.articleDescription}
                 </p>
                 <Link href="/haberlerVeMakaleler" className="text-gray-900 hover:underline inline-block">
-                  Devamını Oku →
+                  {t.home.newsSection.readMore}
                 </Link>
               </motion.div>
             ))}
@@ -214,18 +216,18 @@ export default function Home() {
             variants={fadeInUp}
             className="text-2xl md:text-3xl font-light text-gray-900 mb-8 md:mb-12"
           >
-            Uzmanlık Alanlarımız
+            {t.home.expertiseSection.title}
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
-              "Borçlar Hukuku",
-              "Ceza Hukuku",
-              "İcra ve İflas Hukuku",
-              "İdare ve Vergi Hukuku",
-              "İş Hukuku",
-              "Şirketler Hukuku",
-              "Sözleşmeler Hukuku",
-              "Ticaret Hukuku"
+              t.home.expertiseSection.areas.obligationsLaw,
+              t.home.expertiseSection.areas.criminalLaw,
+              t.home.expertiseSection.areas.executionBankruptcyLaw,
+              t.home.expertiseSection.areas.administrativeTaxLaw,
+              t.home.expertiseSection.areas.laborLaw,
+              t.home.expertiseSection.areas.corporateLaw,
+              t.home.expertiseSection.areas.contractLaw,
+              t.home.expertiseSection.areas.commercialLaw
             ].map((area, index) => (
               <motion.div 
                 key={index} 
